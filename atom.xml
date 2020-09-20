@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>槑和呆呆</title>
+  <subtitle>一个胖子程序员的心路历程</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.codedai.github.io/"/>
+  <updated>2018-09-06T01:27:17.432Z</updated>
+  <id>http://www.codedai.github.io/</id>
+  
+  <author>
+    <name>呆呆</name>
+    <email>wangjiahao@foxmail.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>吃下LeetCode（1）</title>
+    <link href="http://www.codedai.github.io/2018/08/11/2018-08-11/"/>
+    <id>http://www.codedai.github.io/2018/08/11/2018-08-11/</id>
+    <published>2018-08-11T16:59:00.000Z</published>
+    <updated>2018-09-06T01:27:17.432Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1:"></a>Q1:</h1><p>Given a string, find the first non-repeating character in it and return it’s index. If it doesn’t exist, return -1.</p>
+<p>Examples:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">s = <span class="string">"leetcode"</span></div><div class="line"><span class="keyword">return</span> <span class="number">0.</span></div><div class="line"></div><div class="line">s = <span class="string">"loveleetcode"</span>,</div><div class="line"><span class="keyword">return</span> <span class="number">2.</span></div></pre></td></tr></table></figure>
+<p>Note: You may assume the string contain only lowercase letters.</p>
+<h2 id="A1"><a href="#A1" class="headerlink" title="A1:"></a>A1:</h2><p>建立字母表字典，两次循环。<br>但是还是处于一个运行速度比较慢的范围。<br>O(n^2)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">firstUniqChar</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type s: str</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">        s_dic = &#123;chr(i):<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">97</span>,<span class="number">123</span>)&#125;</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</div><div class="line">            s_dic[i] +=<span class="number">1</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</div><div class="line">            <span class="keyword">if</span> s_dic[s[i]] == <span class="number">1</span>:</div><div class="line">                <span class="keyword">return</span> i</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<h2 id="A1-1"><a href="#A1-1" class="headerlink" title="A1-1:"></a>A1-1:</h2><p>速度最快的方法：<br>O(26*n)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">firstUniqChar</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        :type s: str</div><div class="line">        :rtype: int</div><div class="line">        """</div><div class="line">        min_ind = len(s)</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> string.ascii_lowercase:</div><div class="line">            l, r = s.find(ch), s.rfind(ch)</div><div class="line">            <span class="keyword">if</span> l != <span class="number">-1</span> <span class="keyword">and</span> l == r <span class="keyword">and</span> l &lt; min_ind:</div><div class="line">                min_ind = l</div><div class="line">                </div><div class="line">        <span class="keyword">return</span> min_ind <span class="keyword">if</span> min_ind != len(s) <span class="keyword">else</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<h2 id="字典和字符串操作"><a href="#字典和字符串操作" class="headerlink" title="字典和字符串操作"></a>字典和字符串操作</h2><h3 id="字典操作"><a href="#字典操作" class="headerlink" title="字典操作"></a>字典操作</h3><h4 id="创建字典"><a href="#创建字典" class="headerlink" title="创建字典"></a>创建字典</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">d = &#123;&#125;</div><div class="line">d = dict()</div></pre></td></tr></table></figure>
+<h4 id="初始化字典"><a href="#初始化字典" class="headerlink" title="初始化字典"></a>初始化字典</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">d = &#123;&apos;name&apos;: &apos;Wang&apos;&#125; #&#123;&apos;name&apos;: &apos;Wang&apos;&#125;</div><div class="line">d = dict(name=&apos;Wang&apos;) #&#123;&apos;name&apos;: &apos;Wang&apos;&#125;</div></pre></td></tr></table></figure>
+<p>但是第二种方法有可能会引起这样的bug：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">key = &apos;name&apos;</div><div class="line">dic = &#123; key :&apos;cold&apos;&#125;  # &#123;&apos;name&apos;:&apos;cold&apos;&#125;</div><div class="line">dic = dict(key = &apos;cold&apos;) # &#123;&apos;key&apos;: &apos;cold&apos;&#125;</div></pre></td></tr></table></figure>
+<p>Python字典还有一种初始化方式,就是使用字典的fromkeys方法可以从列表中获取元素作为键并用None或fromkeys方法的第二个参数初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dic = &#123;&#125;.fromkeys([&apos;name&apos;, &apos;blog&apos;])</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: None, &apos;name&apos;: None&#125;</div><div class="line">dic = dict().fromkeys([&apos;name&apos;, &apos;blog&apos;])</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: None, &apos;name&apos;: None&#125;</div><div class="line">dic = dict().fromkeys([&apos;name&apos;, &apos;blog&apos;], &apos;code&apos;)</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;code&apos;, &apos;name&apos;: &apos;code&apos;&#125;</div></pre></td></tr></table></figure>
+<h4 id="获取键值"><a href="#获取键值" class="headerlink" title="获取键值"></a>获取键值</h4><p>常用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dic = &#123;&apos;name&apos;:&apos;party&apos;, &apos;blog&apos;:&apos;helloworld&apos;&#125;</div><div class="line">&gt;&gt;&gt; dic[&apos;name&apos;]</div><div class="line">&apos;party&apos;</div></pre></td></tr></table></figure>
+<p>但是这种形式在获取不存在键的键值的时候会触发KeyError异常，更加优雅的方式是利用<code>get</code>，当该键不存在时，返回<code>None</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dic = dict(name= &apos;party&apos;, blog=&apos;www.helloworld.party&apos;)</div><div class="line">&gt;&gt;&gt; dic.get(&apos;name&apos;)</div><div class="line">&apos;party&apos;</div><div class="line">&gt;&gt;&gt; dic.get(&apos;blogname&apos;)</div><div class="line">None</div><div class="line">&gt;&gt;&gt; dic.get(&apos;blogname&apos;, &apos;helloworld&apos;)</div><div class="line">&apos;helloworld&apos;</div></pre></td></tr></table></figure>
+<p>我们看到使用get方法获取不存在的键值的时候不会触发异常,同时get方法接收两个参数,当不存在该键的时候就会返回第二个参数的值 我们可以看到使用get更加的优雅</p>
+<h4 id="更新-添加"><a href="#更新-添加" class="headerlink" title="更新/添加"></a>更新/添加</h4><p>Python 字典可以使用键作为索引来访问/更新/添加值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; dic = dict()</div><div class="line">&gt;&gt;&gt; dic[&apos;name&apos;] = &apos;party&apos;</div><div class="line">&gt;&gt;&gt; dic[&apos;blog&apos;] = &apos;helloworld&apos;</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;helloworld.party&apos;, &apos;name&apos;: &apos;cold&apos;&#125;</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;helloworld.party&apos;, &apos;name&apos;: &apos;cold night&apos;&#125;</div></pre></td></tr></table></figure>
+<p>同时Python字典的update方法也可以更新和添加字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; dic = dict(name=&apos;cold&apos;, blog=&apos;helloworld.party&apos;)</div><div class="line">&gt;&gt;&gt; dic.update(&#123;&apos;name&apos;:&apos;cold night&apos;, &apos;blogname&apos;:&apos;helloworld&apos;&#125;)</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;helloworld.party&apos;, &apos;name&apos;: &apos;cold night&apos;, &apos;blogname&apos;: &apos;helloworld&apos;&#125;</div><div class="line">&gt;&gt;&gt; dic.update(name=&apos;cold&apos;, blog=&apos;www.helloworld.party&apos;) # 更优雅</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;www.helloworld.party&apos;, &apos;name&apos;: &apos;cold&apos;, &apos;blogname&apos;: &apos;helloworld&apos;&#125;</div></pre></td></tr></table></figure>
+<p>Python字典的update方法可以使用一个字典来更新字典,也可以使用参数传递类似dict函数一样的方式更新一个字典,上面代码中哦功能的第二个更加优雅,但是同样和dict函数类似,键是变量时也只取字面值。</p>
+<h4 id="字典删除"><a href="#字典删除" class="headerlink" title="字典删除"></a>字典删除</h4><p>可以调用Python内置关键字del来删除一个键值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; dic = dict(name=&apos;cold&apos;, blog=&apos;helloworld.party&apos;)</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;helloworld.party&apos;, &apos;name&apos;: &apos;cold&apos;&#125;</div><div class="line">&gt;&gt;&gt; del dic[&apos;name&apos;]</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;helloworld.party&apos;&#125;</div></pre></td></tr></table></figure>
+<p>同时也可以使用字典的pop方法来取出一个键值,并删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; dic = dict(name=&apos;cold&apos;, blog=&apos;helloworld.party&apos;)</div><div class="line">&gt;&gt;&gt; dic.pop(&apos;name&apos;)</div><div class="line">&apos;cold&apos;</div><div class="line">&gt;&gt;&gt; dic</div><div class="line">&#123;&apos;blog&apos;: &apos;helloworld.party&apos;&#125;</div></pre></td></tr></table></figure>
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><p>获取所有key</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; dic = dict(name=&apos;cold&apos;, blog=&apos;helloworld.party&apos;)</div><div class="line">&gt;&gt;&gt; dic.keys()</div><div class="line">[&apos;blog&apos;, &apos;name&apos;]</div></pre></td></tr></table></figure>
+<p>获取key,value并循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; dic = dict(name=&apos;cold&apos;, blog=&apos;helloworld.party&apos;)</div><div class="line">&gt;&gt;&gt; for key, value in dic.items():</div><div class="line">...     print key, &apos;:&apos;,  value</div><div class="line">... </div><div class="line">blog : helloworld.party</div><div class="line">name : cold</div></pre></td></tr></table></figure>
+<h3 id="字符串搜索和替换"><a href="#字符串搜索和替换" class="headerlink" title="字符串搜索和替换"></a>字符串搜索和替换</h3><p><a href="https://blog.csdn.net/SeeTheWorld518/article/details/47346143" target="_blank" rel="external">Python字符串操作之字符串搜索与替换</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Q1&quot;&gt;&lt;a href=&quot;#Q1&quot; class=&quot;headerlink&quot; title=&quot;Q1:&quot;&gt;&lt;/a&gt;Q1:&lt;/h1&gt;&lt;p&gt;Given a string, find the first non-repeating character in it and ret
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="http://www.codedai.github.io/categories/LeetCode/"/>
+    
+    
+      <category term="Leetcode" scheme="http://www.codedai.github.io/tags/Leetcode/"/>
+    
+      <category term="python" scheme="http://www.codedai.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>七月的梦</title>
+    <link href="http://www.codedai.github.io/2018/08/11/2018-07-13/"/>
+    <id>http://www.codedai.github.io/2018/08/11/2018-07-13/</id>
+    <published>2018-08-11T16:59:00.000Z</published>
+    <updated>2018-09-06T00:48:12.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>七月像是梦一样。<br>入梦前是在初入夏天的渥太华，放下怎么也看不动的论文，身边的人来来回回，自己却越来越孤单。<br>梦醒的时候，发现自己站在31号凌晨3点的渥太华机场门口，等着走错路的Uber。机场前面的水泥支撑立柱，12号和13号指示牌之前，空气变得有了一丝凉意，人越来越少，西半球的人们渐渐入睡，零星的窸窸窣窣的声音，不远处的森林里有风吹过，世界也变得越来越安静。<br>我还是一个人。</p>
+<a id="more"></a>
+<blockquote>
+<p>What would I see through your eyes if I could get inside?</p>
+</blockquote>
+<p>又一股力量突然把自己按在椅背上，身体向后仰，地上的一切变得越来越远，从跑道的水泥地面，然后大片的绿色占据了视野的大部分地方，身边的云越来越浓，像烟气一样的白色飞快的往后撤去，然后光线变得刺眼，云彩变成了大团大片的柔软，垫到飞机的下面。安全带指示灯灭掉，拉下遮光板，要睡觉了。</p>
+<p>我也不知道自己还能爱你多久，而且还是在这种不能让别人知道我还爱你的状况下，我多想可以在你回来的时候还在爱你。</p>
+<p>希望你可以快点。</p>
+<p>对不起，我累了。你想我离开我离开就是了。</p>
+<p>多好。</p>
+<p>总比我看着你们恩爱好受很多。</p>
+<p>就此离开。</p>
+<p>互不相欠。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;七月像是梦一样。&lt;br&gt;入梦前是在初入夏天的渥太华，放下怎么也看不动的论文，身边的人来来回回，自己却越来越孤单。&lt;br&gt;梦醒的时候，发现自己站在31号凌晨3点的渥太华机场门口，等着走错路的Uber。机场前面的水泥支撑立柱，12号和13号指示牌之前，空气变得有了一丝凉意，人越来越少，西半球的人们渐渐入睡，零星的窸窸窣窣的声音，不远处的森林里有风吹过，世界也变得越来越安静。&lt;br&gt;我还是一个人。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/categories/sketch/"/>
+    
+    
+      <category term="潘晨" scheme="http://www.codedai.github.io/tags/%E6%BD%98%E6%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>世界杯</title>
+    <link href="http://www.codedai.github.io/2018/06/14/ahdlbtfpmaiu/"/>
+    <id>http://www.codedai.github.io/2018/06/14/ahdlbtfpmaiu/</id>
+    <published>2018-06-14T16:59:00.000Z</published>
+    <updated>2018-06-14T04:39:38.646Z</updated>
+    
+    <content type="html"><![CDATA[<p>世界杯到了，我支持中国队。</p>
+<a id="more"></a>
+<p>想来，上次世界杯的时候，好像是刚刚结束了军训。</p>
+<p>从A寝里面拖出来一条巨长的网线，把一台小笔记本电脑放到小茶几上，10几个大老爷们穿着裤衩或坐在铁沙发或搬出来自己的椅子，围在一块。忘了是哪两个球队的比赛，印象深刻的是好像旁边宿舍的网更快一点，他们那边的欢呼声比我们这边的进球更快一些。</p>
+<p>印象更深刻的是球赛结束后，从商业街买回来的满满两提包子。真鸡儿好吃。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;世界杯到了，我支持中国队。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/categories/sketch/"/>
+    
+    
+      <category term="世界杯" scheme="http://www.codedai.github.io/tags/%E4%B8%96%E7%95%8C%E6%9D%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>神经网络从入门到放弃 -- 了解TensorFlow 之 LSTM相关API读后感（下）</title>
+    <link href="http://www.codedai.github.io/2018/05/16/2018-05-16/"/>
+    <id>http://www.codedai.github.io/2018/05/16/2018-05-16/</id>
+    <published>2018-05-17T03:59:00.000Z</published>
+    <updated>2018-05-24T01:13:39.818Z</updated>
+    
+    <content type="html"><![CDATA[<p>这次还是API吹水</p>
+<p><a href="https://github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/python/ops/rnn_cell_impl.py" target="_blank" rel="external">rnn_cell_impl.py</a></p>
+<p>为什么先写了个下呢，因为BasicRNNCell和BasicLSTMCell是继承自LayerRNNCell，上篇应该是关于这个父类的读后感，可能还会有一些tf里面一些相关的函数的阅读。至于这个上篇会不会出现，哈哈哈哈哈哈…我也不知道，就跟我爱的那个人能不能回来的结果一样。[无奈.gif]</p>
+<h1 id="linear-args-output-size-bias-bias-initilizer-None-kernel-initializer-None"><a href="#linear-args-output-size-bias-bias-initilizer-None-kernel-initializer-None" class="headerlink" title="_linear(args, output_size, bias, bias_initilizer=None, kernel_initializer=None)"></a>_linear(args, output_size, bias, bias_initilizer=None, kernel_initializer=None)</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_linear</span><span class="params">(args,</span></span></div><div class="line">            output_size,</div><div class="line">            bias,</div><div class="line">            bias_initializer=None,</div><div class="line">            kernel_initializer=None):</div><div class="line">  <span class="string">"""Linear map: sum_i(args[i] * W[i]), where W[i] is a variable.</span></div><div class="line">  Args:</div><div class="line">    args: a 2D Tensor or a list of 2D, batch x n, Tensors.</div><div class="line">    output_size: int, second dimension of W[i].</div><div class="line">    bias: boolean, whether to add a bias term or not.</div><div class="line">    bias_initializer: starting value to initialize the bias</div><div class="line">      (default is all zeros).</div><div class="line">    kernel_initializer: starting value to initialize the weight.</div><div class="line">  Returns:</div><div class="line">    A 2D Tensor with shape [batch x output_size] equal to</div><div class="line">    sum_i(args[i] * W[i]), where W[i]s are newly created matrices.</div><div class="line">  Raises:</div><div class="line">    ValueError: if some of the arguments has unspecified or wrong shape.</div><div class="line">  """</div><div class="line">  <span class="keyword">if</span> args <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> (nest.is_sequence(args) <span class="keyword">and</span> <span class="keyword">not</span> args):</div><div class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"`args` must be specified"</span>)</div><div class="line">  <span class="keyword">if</span> <span class="keyword">not</span> nest.is_sequence(args):</div><div class="line">    args = [args]</div><div class="line"></div><div class="line">  <span class="comment"># Calculate the total size of arguments on dimension 1.</span></div><div class="line">  total_arg_size = <span class="number">0</span></div><div class="line">  shapes = [a.get_shape() <span class="keyword">for</span> a <span class="keyword">in</span> args]</div><div class="line">  <span class="keyword">for</span> shape <span class="keyword">in</span> shapes:</div><div class="line">    <span class="keyword">if</span> shape.ndims != <span class="number">2</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">"linear is expecting 2D arguments: %s"</span> % shapes)</div><div class="line">    <span class="keyword">if</span> shape[<span class="number">1</span>].value <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">"linear expects shape[1] to be provided for shape %s, "</span></div><div class="line">                       <span class="string">"but saw %s"</span> % (shape, shape[<span class="number">1</span>]))</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      total_arg_size += shape[<span class="number">1</span>].value</div><div class="line"></div><div class="line">  dtype = [a.dtype <span class="keyword">for</span> a <span class="keyword">in</span> args][<span class="number">0</span>]</div><div class="line"></div><div class="line">  <span class="comment"># Now the computation.</span></div><div class="line">  scope = vs.get_variable_scope()</div><div class="line">  <span class="keyword">with</span> vs.variable_scope(scope) <span class="keyword">as</span> outer_scope:</div><div class="line">    weights = vs.get_variable(</div><div class="line">        _WEIGHTS_VARIABLE_NAME, [total_arg_size, output_size],</div><div class="line">        dtype=dtype,</div><div class="line">        initializer=kernel_initializer)</div><div class="line">    <span class="keyword">if</span> len(args) == <span class="number">1</span>:</div><div class="line">      res = math_ops.matmul(args[<span class="number">0</span>], weights)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      res = math_ops.matmul(array_ops.concat(args, <span class="number">1</span>), weights)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> bias:</div><div class="line">      <span class="keyword">return</span> res</div><div class="line">    <span class="keyword">with</span> vs.variable_scope(outer_scope) <span class="keyword">as</span> inner_scope:</div><div class="line">      inner_scope.set_partitioner(<span class="keyword">None</span>)</div><div class="line">      <span class="keyword">if</span> bias_initializer <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        bias_initializer = init_ops.constant_initializer(<span class="number">0.0</span>, dtype=dtype)</div><div class="line">      biases = vs.get_variable(</div><div class="line">          _BIAS_VARIABLE_NAME, [output_size],</div><div class="line">          dtype=dtype,</div><div class="line">          initializer=bias_initializer)</div><div class="line">    <span class="keyword">return</span> nn_ops.bias_add(res, biases)</div></pre></td></tr></table></figure>
+<p>以上是5.16号之前的内容，约等于无。<br>以下是正儿八经的介绍，结合最近实现的流量模型，主要包括<code>BasicRNNCell</code>, <code>BasicLSTMCell</code>, <code>MultiRNNCell</code>, <code>dynamic_rnn</code>的代码理解，[无比严肃脸]。<br><a id="more"></a></p>
+<h1 id="tf-contrib-rnn-BasicRNNCell"><a href="#tf-contrib-rnn-BasicRNNCell" class="headerlink" title="tf.contrib.rnn.BasicRNNCell"></a>tf.contrib.rnn.BasicRNNCell</h1><p>通过BasicRnnCell定义的实例对象Cell，其中两个属性Cell.state_size和Cell.output_size返回的都是num_units. 通过<em>call</em>将实例A变成一个可调用的对象，当传入输入input和状态state后，根据公式output = new_state = act(W <em> input + U </em> state + B) 可以得到相应的输出并返回,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasicRNNCell</span><span class="params">(LayerRNNCell)</span>:</span></div><div class="line">  <span class="string">"""The most basic RNN cell.</span></div><div class="line">  Args:</div><div class="line">    num_units: int, The number of units in the RNN cell.</div><div class="line">    activation: Nonlinearity to use.  Default: `tanh`.</div><div class="line">    reuse: (optional) Python boolean describing whether to reuse variables</div><div class="line">     in an existing scope.  If not `True`, and the existing scope already has</div><div class="line">     the given variables, an error is raised.</div><div class="line">    name: String, the name of the layer. Layers with the same name will</div><div class="line">      share weights, but to avoid mistakes we require reuse=True in such</div><div class="line">      cases.</div><div class="line">  """</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_units, activation=None, reuse=None, name=None)</span>:</span></div><div class="line">    super(BasicRNNCell, self).__init__(_reuse=reuse, name=name)</div><div class="line"></div><div class="line">    <span class="comment"># Inputs must be 2-dimensional.</span></div><div class="line">    self.input_spec = base_layer.InputSpec(ndim=<span class="number">2</span>)</div><div class="line"></div><div class="line">    self._num_units = num_units</div><div class="line">    self._activation = activation <span class="keyword">or</span> math_ops.tanh</div><div class="line"></div><div class="line"><span class="meta">  @property</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">return</span> self._num_units</div><div class="line"></div><div class="line"><span class="meta">  @property</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">return</span> self._num_units</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, inputs_shape)</span>:</span></div><div class="line">    <span class="keyword">if</span> inputs_shape[<span class="number">1</span>].value <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">"Expected inputs.shape[-1] to be known, saw shape: %s"</span></div><div class="line">                       % inputs_shape)</div><div class="line"></div><div class="line">    input_depth = inputs_shape[<span class="number">1</span>].value</div><div class="line">    self._kernel = self.add_variable(</div><div class="line">        _WEIGHTS_VARIABLE_NAME,</div><div class="line">        shape=[input_depth + self._num_units, self._num_units])</div><div class="line">    self._bias = self.add_variable(</div><div class="line">        _BIAS_VARIABLE_NAME,</div><div class="line">        shape=[self._num_units],</div><div class="line">        initializer=init_ops.zeros_initializer(dtype=self.dtype))</div><div class="line"></div><div class="line">    self.built = <span class="keyword">True</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs, state)</span>:</span></div><div class="line">    <span class="string">"""Most basic RNN: output = new_state = act(W * input + U * state + B)."""</span></div><div class="line"></div><div class="line">    gate_inputs = math_ops.matmul(</div><div class="line">        array_ops.concat([inputs, state], <span class="number">1</span>), self._kernel)</div><div class="line">    gate_inputs = nn_ops.bias_add(gate_inputs, self._bias)</div><div class="line">    output = self._activation(gate_inputs)</div><div class="line">    <span class="keyword">return</span> output, output</div></pre></td></tr></table></figure>
+<h2 id="init"><a href="#init" class="headerlink" title="init"></a><strong>init</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_units, activation=None, reuse=None, name=None)</span>:</span></div><div class="line">  super(BasicRNNCell, self).__init__(_reuse=reuse, name=name)</div><div class="line"></div><div class="line">  <span class="comment"># Inputs must be 2-dimensional.</span></div><div class="line">  self.input_spec = base_layer.InputSpec(ndim=<span class="number">2</span>)</div><div class="line"></div><div class="line">  self._num_units = num_units</div><div class="line">  self._activation = activation <span class="keyword">or</span> math_ops.tanh</div></pre></td></tr></table></figure>
+<ul>
+<li><code>num_units</code>: int, 一个cell里面有几个单元，及为该层输出结果的维度。</li>
+<li><code>reuse</code>: boolean, 用来标记一个变量在同一个scope里面是否复用。如果设为False，且在这个scope里变量被重新赋值，则会报错。</li>
+<li><code>name</code>: String, 层名。要注意的是相同名字的层会分享权值，所以要谨慎定义名字和<code>reuse</code>参数。</li>
+<li><code>activation</code>: 激活函数，在<code>call</code>函数里面被调用。</li>
+</ul>
+<h2 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@property</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(self)</span>:</span></div><div class="line">  <span class="keyword">return</span> self._num_units</div><div class="line"></div><div class="line"><span class="meta">@property</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(self)</span>:</span></div><div class="line">  <span class="keyword">return</span> self._num_units</div></pre></td></tr></table></figure>
+<p>两个属性，姨母了然，不在赘述。</p>
+<h2 id="build"><a href="#build" class="headerlink" title="build"></a><strong>build</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, inputs_shape)</span>:</span></div><div class="line">  <span class="keyword">if</span> inputs_shape[<span class="number">1</span>].value <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">    <span class="keyword">raise</span> ValueError(<span class="string">"Expected inputs.shape[-1] to be known, saw shape: %s"</span></div><div class="line">                     % inputs_shape)</div><div class="line"></div><div class="line">  input_depth = inputs_shape[<span class="number">1</span>].value</div><div class="line">  self._kernel = self.add_variable(</div><div class="line">      _WEIGHTS_VARIABLE_NAME,</div><div class="line"></div><div class="line">      shape=[input_depth + self._num_units, self._num_units])</div><div class="line">  self._bias = self.add_variable(</div><div class="line">      _BIAS_VARIABLE_NAME,</div><div class="line">      shape=[self._num_units],</div><div class="line">      initializer=init_ops.zeros_initializer(dtype=self.dtype))</div><div class="line"></div><div class="line">  self.built = <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p><code>build</code>函数的作用是负责生成参数。<br>RNN的内部结构如图，bulid就是生成里面的tanh核所需要的权值<code>_kernel</code>和偏置<code>_bias</code>。<br><img src="http://oavr3g7ux.bkt.clouddn.com/15271036274899.png" alt=""></p>
+<h2 id="call"><a href="#call" class="headerlink" title="call"></a><strong>call</strong></h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs, state)</span>:</span></div><div class="line">  <span class="string">"""Most basic RNN: output = new_state = act(W * input + U * state + B)."""</span></div><div class="line"></div><div class="line">  gate_inputs = math_ops.matmul(</div><div class="line">      array_ops.concat([inputs, state], <span class="number">1</span>), self._kernel)</div><div class="line">  gate_inputs = nn_ops.bias_add(gate_inputs, self._bias)</div><div class="line">  output = self._activation(gate_inputs)</div><div class="line">  <span class="keyword">return</span> output, output</div></pre></td></tr></table></figure>
+<p>在tensorflow的官方文档下<code>__call__</code>函数的参数如下</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">__call__(</div><div class="line">    inputs,</div><div class="line">    state,</div><div class="line">    scope=<span class="keyword">None</span>,</div><div class="line">    *args,</div><div class="line">    **kwargs</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li>inputs: 2维，其形式为[batch_size, input_size].</li>
+<li>state: if self.state_size is an integer, this should be a 2-D Tensor with shape [batch_size, self.state_size]. Otherwise, if self.state_size is a tuple of integers, this should be a tuple with shapes [batch_size, s] for s in self.state_size.</li>
+</ul>
+<p>这里可以留意，tensorflow在<code>state</code>分了两种情况，一种是，<code>state_size</code>为int型，这时state的形式为<code>[batch_size, self.state_size]</code>的二维张量，但是当<code>state_size</code>为<code>tuple</code>类型时，state也应该是元组的形式出现。</p>
+<p>call函数的主要作用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">output = new_state = activation(W * input + U * state + B).</div></pre></td></tr></table></figure>
+<h1 id="tf-contrib-rnn-BasicLSTMCell"><a href="#tf-contrib-rnn-BasicLSTMCell" class="headerlink" title="tf.contrib.rnn.BasicLSTMCell"></a>tf.contrib.rnn.BasicLSTMCell</h1><p>LSTM单元的结构如下所示。<br><img src="http://oavr3g7ux.bkt.clouddn.com/15271058619025.png" alt=""></p>
+<p>在参数设置上，<code>BasicLSTMCell</code>和<code>BasicRNNCell</code>基本相差不大，挑不同点来说。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasicLSTMCell</span><span class="params">(LayerRNNCell)</span>:</span></div><div class="line">  <span class="string">"""Basic LSTM recurrent network cell.</span></div><div class="line">  The implementation is based on: http://arxiv.org/abs/1409.2329.</div><div class="line">  We add forget_bias (default: 1) to the biases of the forget gate in order to</div><div class="line">  reduce the scale of forgetting in the beginning of the training.</div><div class="line">  It does not allow cell clipping, a projection layer, and does not</div><div class="line">  use peep-hole connections: it is the basic baseline.</div><div class="line">  For advanced models, please use the full @&#123;tf.nn.rnn_cell.LSTMCell&#125;</div><div class="line">  that follows.</div><div class="line">  """</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_units, forget_bias=<span class="number">1.0</span>,</span></span></div><div class="line">               state_is_tuple=True, activation=None, reuse=None, name=None):</div><div class="line">    <span class="string">"""Initialize the basic LSTM cell.</span></div><div class="line">    Args:</div><div class="line">      num_units: int, The number of units in the LSTM cell.</div><div class="line">      forget_bias: float, The bias added to forget gates (see above).</div><div class="line">        Must set to `0.0` manually when restoring from CudnnLSTM-trained</div><div class="line">        checkpoints.</div><div class="line">      state_is_tuple: If True, accepted and returned states are 2-tuples of</div><div class="line">        the `c_state` and `m_state`.  If False, they are concatenated</div><div class="line">        along the column axis.  The latter behavior will soon be deprecated.</div><div class="line">      activation: Activation function of the inner states.  Default: `tanh`.</div><div class="line">      reuse: (optional) Python boolean describing whether to reuse variables</div><div class="line">        in an existing scope.  If not `True`, and the existing scope already has</div><div class="line">        the given variables, an error is raised.</div><div class="line">      name: String, the name of the layer. Layers with the same name will</div><div class="line">        share weights, but to avoid mistakes we require reuse=True in such</div><div class="line">        cases.</div><div class="line">      When restoring from CudnnLSTM-trained checkpoints, must use</div><div class="line">      `CudnnCompatibleLSTMCell` instead.</div><div class="line">    """</div><div class="line">    super(BasicLSTMCell, self).__init__(_reuse=reuse, name=name)</div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> state_is_tuple:</div><div class="line">      logging.warn(<span class="string">"%s: Using a concatenated state is slower and will soon be "</span></div><div class="line">                   <span class="string">"deprecated.  Use state_is_tuple=True."</span>, self)</div><div class="line"></div><div class="line">    <span class="comment"># Inputs must be 2-dimensional.</span></div><div class="line">    self.input_spec = base_layer.InputSpec(ndim=<span class="number">2</span>)</div><div class="line"></div><div class="line">    self._num_units = num_units</div><div class="line">    self._forget_bias = forget_bias</div><div class="line">    self._state_is_tuple = state_is_tuple</div><div class="line">    self._activation = activation <span class="keyword">or</span> math_ops.tanh</div><div class="line"></div><div class="line"><span class="meta">  @property</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">state_size</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">return</span> (LSTMStateTuple(self._num_units, self._num_units)</div><div class="line">            <span class="keyword">if</span> self._state_is_tuple <span class="keyword">else</span> <span class="number">2</span> * self._num_units)</div><div class="line"></div><div class="line"><span class="meta">  @property</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">output_size</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="keyword">return</span> self._num_units</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, inputs_shape)</span>:</span></div><div class="line">    <span class="keyword">if</span> inputs_shape[<span class="number">1</span>].value <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">      <span class="keyword">raise</span> ValueError(<span class="string">"Expected inputs.shape[-1] to be known, saw shape: %s"</span></div><div class="line">                       % inputs_shape)</div><div class="line"></div><div class="line">    input_depth = inputs_shape[<span class="number">1</span>].value</div><div class="line">    h_depth = self._num_units</div><div class="line">    self._kernel = self.add_variable(</div><div class="line">        _WEIGHTS_VARIABLE_NAME,</div><div class="line">        shape=[input_depth + h_depth, <span class="number">4</span> * self._num_units])</div><div class="line">    self._bias = self.add_variable(</div><div class="line">        _BIAS_VARIABLE_NAME,</div><div class="line">        shape=[<span class="number">4</span> * self._num_units],</div><div class="line">        initializer=init_ops.zeros_initializer(dtype=self.dtype))</div><div class="line"></div><div class="line">    self.built = <span class="keyword">True</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs, state)</span>:</span></div><div class="line">    <span class="string">"""Long short-term memory cell (LSTM).</span></div><div class="line">    Args:</div><div class="line">      inputs: `2-D` tensor with shape `[batch_size, input_size]`.</div><div class="line">      state: An `LSTMStateTuple` of state tensors, each shaped</div><div class="line">        `[batch_size, self.state_size]`, if `state_is_tuple` has been set to</div><div class="line">        `True`.  Otherwise, a `Tensor` shaped</div><div class="line">        `[batch_size, 2 * self.state_size]`.</div><div class="line">    Returns:</div><div class="line">      A pair containing the new hidden state, and the new state (either a</div><div class="line">        `LSTMStateTuple` or a concatenated state, depending on</div><div class="line">        `state_is_tuple`).</div><div class="line">    """</div><div class="line">    sigmoid = math_ops.sigmoid</div><div class="line">    one = constant_op.constant(<span class="number">1</span>, dtype=dtypes.int32)</div><div class="line">    <span class="comment"># Parameters of gates are concatenated into one multiply for efficiency.</span></div><div class="line">    <span class="keyword">if</span> self._state_is_tuple:</div><div class="line">      c, h = state</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      c, h = array_ops.split(value=state, num_or_size_splits=<span class="number">2</span>, axis=one)</div><div class="line"></div><div class="line">    gate_inputs = math_ops.matmul(</div><div class="line">        array_ops.concat([inputs, h], <span class="number">1</span>), self._kernel)</div><div class="line">    gate_inputs = nn_ops.bias_add(gate_inputs, self._bias)</div><div class="line"></div><div class="line">    <span class="comment"># i = input_gate, j = new_input, f = forget_gate, o = output_gate</span></div><div class="line">    i, j, f, o = array_ops.split(</div><div class="line">        value=gate_inputs, num_or_size_splits=<span class="number">4</span>, axis=one)</div><div class="line"></div><div class="line">    forget_bias_tensor = constant_op.constant(self._forget_bias, dtype=f.dtype)</div><div class="line">    <span class="comment"># Note that using `add` and `multiply` instead of `+` and `*` gives a</span></div><div class="line">    <span class="comment"># performance improvement. So using those at the cost of readability.</span></div><div class="line">    add = math_ops.add</div><div class="line">    multiply = math_ops.multiply</div><div class="line">    new_c = add(multiply(c, sigmoid(add(f, forget_bias_tensor))),</div><div class="line">                multiply(sigmoid(i), self._activation(j)))</div><div class="line">    new_h = multiply(self._activation(new_c), sigmoid(o))</div><div class="line"></div><div class="line">    <span class="keyword">if</span> self._state_is_tuple:</div><div class="line">      new_state = LSTMStateTuple(new_c, new_h)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      new_state = array_ops.concat([new_c, new_h], <span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> new_h, new_state</div></pre></td></tr></table></figure>
+<h2 id="LSTMStateTuple"><a href="#LSTMStateTuple" class="headerlink" title="LSTMStateTuple"></a>LSTMStateTuple</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">_LSTMStateTuple = collections.namedtuple(<span class="string">"LSTMStateTuple"</span>, (<span class="string">"c"</span>, <span class="string">"h"</span>))</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@tf_export("nn.rnn_cell.LSTMStateTuple")</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LSTMStateTuple</span><span class="params">(_LSTMStateTuple)</span>:</span></div><div class="line">  <span class="string">"""Tuple used by LSTM Cells for `state_size`, `zero_state`, and output state.</span></div><div class="line">  Stores two elements: `(c, h)`, in that order. Where `c` is the hidden state</div><div class="line">  and `h` is the output.</div><div class="line">  Only used when `state_is_tuple=True`.</div><div class="line">  """</div><div class="line">  __slots__ = ()</div><div class="line"></div><div class="line"><span class="meta">  @property</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">dtype</span><span class="params">(self)</span>:</span></div><div class="line">    (c, h) = self</div><div class="line">    <span class="keyword">if</span> c.dtype != h.dtype:</div><div class="line">      <span class="keyword">raise</span> TypeError(<span class="string">"Inconsistent internal state: %s vs %s"</span> %</div><div class="line">                      (str(c.dtype), str(h.dtype)))</div><div class="line">    <span class="keyword">return</span> c.dtype</div></pre></td></tr></table></figure>
+<h2 id="init-1"><a href="#init-1" class="headerlink" title="init"></a><strong>init</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_units, forget_bias=<span class="number">1.0</span>,</span></span></div><div class="line">             state_is_tuple=True, activation=None, reuse=None, name=None):</div><div class="line">  super(BasicLSTMCell, self).__init__(_reuse=reuse, name=name)</div><div class="line">  <span class="keyword">if</span> <span class="keyword">not</span> state_is_tuple:</div><div class="line">    logging.warn(<span class="string">"%s: Using a concatenated state is slower and will soon be "</span></div><div class="line">                 <span class="string">"deprecated.  Use state_is_tuple=True."</span>, self)</div><div class="line"></div><div class="line">  <span class="comment"># Inputs must be 2-dimensional.</span></div><div class="line">  self.input_spec = base_layer.InputSpec(ndim=<span class="number">2</span>)</div><div class="line"></div><div class="line">  self._num_units = num_units</div><div class="line">  self._forget_bias = forget_bias</div><div class="line">  self._state_is_tuple = state_is_tuple</div><div class="line">  self._activation = activation <span class="keyword">or</span> math_ops.tanh</div></pre></td></tr></table></figure>
+<ul>
+<li><code>forget_bias</code>: 用来确定对前一个状态的记忆程度，默认为1.0，也就是全部记住，为零就是全不记住。</li>
+<li><code>state_is _tuple</code>：默认为<code>True</code>，使得输出状态（c, h）的结构为元组形式。为False的形式即将被弃用，推荐使用True。</li>
+</ul>
+<h2 id="call-1"><a href="#call-1" class="headerlink" title="call"></a><strong>call</strong></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs, state)</span>:</span></div><div class="line">  <span class="string">"""Long short-term memory cell (LSTM).</span></div><div class="line">  Args:</div><div class="line">    inputs: `2-D` tensor with shape `[batch_size, input_size]`.</div><div class="line">    state: An `LSTMStateTuple` of state tensors, each shaped</div><div class="line">      `[batch_size, self.state_size]`, if `state_is_tuple` has been set to</div><div class="line">      `True`.  Otherwise, a `Tensor` shaped</div><div class="line">      `[batch_size, 2 * self.state_size]`.</div><div class="line">  Returns:</div><div class="line">    A pair containing the new hidden state, and the new state (either a</div><div class="line">      `LSTMStateTuple` or a concatenated state, depending on</div><div class="line">      `state_is_tuple`).</div><div class="line">  """</div><div class="line">  sigmoid = math_ops.sigmoid</div><div class="line">  one = constant_op.constant(<span class="number">1</span>, dtype=dtypes.int32)</div><div class="line">  <span class="comment"># Parameters of gates are concatenated into one multiply for efficiency.</span></div><div class="line">  <span class="keyword">if</span> self._state_is_tuple:</div><div class="line">    c, h = state</div><div class="line">  <span class="keyword">else</span>:</div><div class="line">    c, h = array_ops.split(value=state, num_or_size_splits=<span class="number">2</span>, axis=one)</div><div class="line"></div><div class="line">  gate_inputs = math_ops.matmul(</div><div class="line">      array_ops.concat([inputs, h], <span class="number">1</span>), self._kernel)</div><div class="line">  gate_inputs = nn_ops.bias_add(gate_inputs, self._bias)</div><div class="line"></div><div class="line">  <span class="comment"># i = input_gate, j = new_input, f = forget_gate, o = output_gate</span></div><div class="line">  i, j, f, o = array_ops.split(</div><div class="line">      value=gate_inputs, num_or_size_splits=<span class="number">4</span>, axis=one)</div><div class="line"></div><div class="line">  forget_bias_tensor = constant_op.constant(self._forget_bias, dtype=f.dtype)</div><div class="line">  <span class="comment"># Note that using `add` and `multiply` instead of `+` and `*` gives a</span></div><div class="line">  <span class="comment"># performance improvement. So using those at the cost of readability.</span></div><div class="line">  add = math_ops.add</div><div class="line">  multiply = math_ops.multiply</div><div class="line">  new_c = add(multiply(c, sigmoid(add(f, forget_bias_tensor))),</div><div class="line">              multiply(sigmoid(i), self._activation(j)))</div><div class="line">  new_h = multiply(self._activation(new_c), sigmoid(o))</div><div class="line"></div><div class="line">  <span class="keyword">if</span> self._state_is_tuple:</div><div class="line">    new_state = LSTMStateTuple(new_c, new_h)</div><div class="line">  <span class="keyword">else</span>:</div><div class="line">    new_state = array_ops.concat([new_c, new_h], <span class="number">1</span>)</div><div class="line">  <span class="keyword">return</span> new_h, new_state</div></pre></td></tr></table></figure>
+<ul>
+<li><code>state</code>：在<code>state_is_tuple</code>时，<code>state</code>是<code>LSTMStateTuple</code>类型的，二维元组，内容为<code>(c, h)</code><ul>
+<li>c is the hidden state</li>
+<li>h is the output</li>
+</ul>
+</li>
+<li>以上两个状态都是元组得形式，<code>[batch_size, self.state_size]</code></li>
+</ul>
+<p>回头看一下<code>build</code>函数里面所定义的<code>kernel</code>和<code>bias</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">self._kernel = self.add_variable(</div><div class="line">    _WEIGHTS_VARIABLE_NAME,</div><div class="line">    shape=[input_depth + h_depth, <span class="number">4</span> * self._num_units])</div><div class="line">self._bias = self.add_variable(</div><div class="line">    _BIAS_VARIABLE_NAME,</div><div class="line">    shape=[<span class="number">4</span> * self._num_units],</div></pre></td></tr></table></figure>
+<p>可以看出是定义了了一个<strong>1to4</strong>的4套参数。一开始进行了一个W*x+b的运算，将上个输出，和此次输入相结合，再通过split函数切割成四个部分，分别输入cell里面的四个kernel中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">gate_inputs = math_ops.matmul(</div><div class="line">    array_ops.concat([inputs, h], <span class="number">1</span>), self._kernel)</div><div class="line">gate_inputs = nn_ops.bias_add(gate_inputs, self._bias)</div><div class="line"></div><div class="line">  <span class="comment"># 线性计算 concat = [inputs, h]W + b </span></div><div class="line">　　　 <span class="comment"># 线性计算，分配W和b，W的shape为（2*num_units, 4*num_units）, b的shape为（4*num_units,）,共包含有四套参数，</span></div><div class="line">  <span class="comment"># concat shape(batch_size, 4*num_units)</span></div><div class="line">   　　<span class="comment"># 注意：只有cell 的input和output的size相等时才可以这样计算，否则要定义两套W,b.每套再包含四套参数</span></div><div class="line"></div><div class="line"><span class="comment"># i = input_gate, j = new_input, f = forget_gate, o = output_gate</span></div><div class="line">i, j, f, o = array_ops.split(</div><div class="line">    value=gate_inputs, num_or_size_splits=<span class="number">4</span>, axis=one)</div></pre></td></tr></table></figure>
+<p>最后的输出部分中所进行的计算<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external">Understanding LSTM Networks</a>一文中进行了深入浅出的介绍，结合LSTM的内部结构理解，在此也不再赘述：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">new_c = add(multiply(c, sigmoid(add(f, forget_bias_tensor))),</div><div class="line">                multiply(sigmoid(i), self._activation(j)))</div><div class="line">    new_h = multiply(self._activation(new_c), sigmoid(o))</div><div class="line"></div><div class="line">    <span class="keyword">if</span> self._state_is_tuple:</div><div class="line">      new_state = LSTMStateTuple(new_c, new_h)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      new_state = array_ops.concat([new_c, new_h], <span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> new_h, new_state</div></pre></td></tr></table></figure>
+<h1 id="tf-nn-dynamic-rnn"><a href="#tf-nn-dynamic-rnn" class="headerlink" title="tf.nn.dynamic_rnn"></a>tf.nn.dynamic_rnn</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dynamic_rnn</span><span class="params">(cell, inputs, sequence_length=None, initial_state=None,</span></span></div><div class="line">                dtype=None, parallel_iterations=None, swap_memory=False,</div><div class="line">                time_major=False, scope=None):</div><div class="line"></div><div class="line">  rnn_cell_impl.assert_like_rnncell(<span class="string">"cell"</span>, cell)</div><div class="line"></div><div class="line">  <span class="keyword">with</span> vs.variable_scope(scope <span class="keyword">or</span> <span class="string">"rnn"</span>) <span class="keyword">as</span> varscope:</div><div class="line">    <span class="comment"># Create a new scope in which the caching device is either</span></div><div class="line">    <span class="comment"># determined by the parent scope, or is set to place the cached</span></div><div class="line">    <span class="comment"># Variable using the same placement as for the rest of the RNN.</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> context.executing_eagerly():</div><div class="line">      <span class="keyword">if</span> varscope.caching_device <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">        varscope.set_caching_device(<span class="keyword">lambda</span> op: op.device)</div><div class="line"></div><div class="line">    <span class="comment"># By default, time_major==False and inputs are batch-major: shaped</span></div><div class="line">    <span class="comment">#   [batch, time, depth]</span></div><div class="line">    <span class="comment"># For internal calculations, we transpose to [time, batch, depth]</span></div><div class="line">    flat_input = nest.flatten(inputs)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> time_major:</div><div class="line">      <span class="comment"># (B,T,D) =&gt; (T,B,D)</span></div><div class="line">      flat_input = [ops.convert_to_tensor(input_) <span class="keyword">for</span> input_ <span class="keyword">in</span> flat_input]</div><div class="line">      flat_input = tuple(_transpose_batch_time(input_) <span class="keyword">for</span> input_ <span class="keyword">in</span> flat_input)</div><div class="line"></div><div class="line">    parallel_iterations = parallel_iterations <span class="keyword">or</span> <span class="number">32</span></div><div class="line">    <span class="keyword">if</span> sequence_length <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">      sequence_length = math_ops.to_int32(sequence_length)</div><div class="line">      <span class="keyword">if</span> sequence_length.get_shape().ndims <span class="keyword">not</span> <span class="keyword">in</span> (<span class="keyword">None</span>, <span class="number">1</span>):</div><div class="line">        <span class="keyword">raise</span> ValueError(</div><div class="line">            <span class="string">"sequence_length must be a vector of length batch_size, "</span></div><div class="line">            <span class="string">"but saw shape: %s"</span> % sequence_length.get_shape())</div><div class="line">      sequence_length = array_ops.identity(  <span class="comment"># Just to find it in the graph.</span></div><div class="line">          sequence_length, name=<span class="string">"sequence_length"</span>)</div><div class="line"></div><div class="line">    batch_size = _best_effort_input_batch_size(flat_input)</div><div class="line"></div><div class="line">    <span class="keyword">if</span> initial_state <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">      state = initial_state</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      <span class="keyword">if</span> <span class="keyword">not</span> dtype:</div><div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">"If there is no initial_state, you must give a dtype."</span>)</div><div class="line">      state = cell.zero_state(batch_size, dtype)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_assert_has_shape</span><span class="params">(x, shape)</span>:</span></div><div class="line">      x_shape = array_ops.shape(x)</div><div class="line">      packed_shape = array_ops.stack(shape)</div><div class="line">      <span class="keyword">return</span> control_flow_ops.Assert(</div><div class="line">          math_ops.reduce_all(math_ops.equal(x_shape, packed_shape)),</div><div class="line">          [<span class="string">"Expected shape for Tensor %s is "</span> % x.name,</div><div class="line">           packed_shape, <span class="string">" but saw shape: "</span>, x_shape])</div><div class="line"></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> context.executing_eagerly() <span class="keyword">and</span> sequence_length <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">      <span class="comment"># Perform some shape validation</span></div><div class="line">      <span class="keyword">with</span> ops.control_dependencies(</div><div class="line">          [_assert_has_shape(sequence_length, [batch_size])]):</div><div class="line">        sequence_length = array_ops.identity(</div><div class="line">            sequence_length, name=<span class="string">"CheckSeqLen"</span>)</div><div class="line"></div><div class="line">    inputs = nest.pack_sequence_as(structure=inputs, flat_sequence=flat_input)</div><div class="line"></div><div class="line">    (outputs, final_state) = _dynamic_rnn_loop(</div><div class="line">        cell,</div><div class="line">        inputs,</div><div class="line">        state,</div><div class="line">        parallel_iterations=parallel_iterations,</div><div class="line">        swap_memory=swap_memory,</div><div class="line">        sequence_length=sequence_length,</div><div class="line">        dtype=dtype)</div><div class="line"></div><div class="line">    <span class="comment"># Outputs of _dynamic_rnn_loop are always shaped [time, batch, depth].</span></div><div class="line">    <span class="comment"># If we are performing batch-major calculations, transpose output back</span></div><div class="line">    <span class="comment"># to shape [batch, time, depth]</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> time_major:</div><div class="line">      <span class="comment"># (T,B,D) =&gt; (B,T,D)</span></div><div class="line">      outputs = nest.map_structure(_transpose_batch_time, outputs)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (outputs, final_state)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>time_major</code>：参数默认为<code>False</code>，意义是<code>input</code>的形式是<code>[batch_size, max_time, output_size]</code></li>
+</ul>
+<blockquote>
+<p>未完待续…</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这次还是API吹水&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/tensorflow/tensorflow/blob/r1.2/tensorflow/python/ops/rnn_cell_impl.py&quot;&gt;rnn_cell_impl.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;为什么先写了个下呢，因为BasicRNNCell和BasicLSTMCell是继承自LayerRNNCell，上篇应该是关于这个父类的读后感，可能还会有一些tf里面一些相关的函数的阅读。至于这个上篇会不会出现，哈哈哈哈哈哈…我也不知道，就跟我爱的那个人能不能回来的结果一样。[无奈.gif]&lt;/p&gt;
+&lt;h1 id=&quot;linear-args-output-size-bias-bias-initilizer-None-kernel-initializer-None&quot;&gt;&lt;a href=&quot;#linear-args-output-size-bias-bias-initilizer-None-kernel-initializer-None&quot; class=&quot;headerlink&quot; title=&quot;_linear(args, output_size, bias, bias_initilizer=None, kernel_initializer=None)&quot;&gt;&lt;/a&gt;_linear(args, output_size, bias, bias_initilizer=None, kernel_initializer=None)&lt;/h1&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;40&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;41&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;42&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;43&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;44&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;45&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;46&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;47&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;48&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;49&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;50&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;51&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;52&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;53&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;54&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;55&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;56&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;57&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;58&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;59&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;60&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;_linear&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(args,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            output_size,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            bias,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            bias_initializer=None,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;            kernel_initializer=None)&lt;/span&gt;:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;string&quot;&gt;&quot;&quot;&quot;Linear map: sum_i(args[i] * W[i]), where W[i] is a variable.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  Args:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    args: a 2D Tensor or a list of 2D, batch x n, Tensors.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    output_size: int, second dimension of W[i].&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    bias: boolean, whether to add a bias term or not.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    bias_initializer: starting value to initialize the bias&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      (default is all zeros).&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    kernel_initializer: starting value to initialize the weight.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  Returns:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    A 2D Tensor with shape [batch x output_size] equal to&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    sum_i(args[i] * W[i]), where W[i]s are newly created matrices.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  Raises:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ValueError: if some of the arguments has unspecified or wrong shape.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &quot;&quot;&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; args &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; (nest.is_sequence(args) &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; args):&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;raise&lt;/span&gt; ValueError(&lt;span class=&quot;string&quot;&gt;&quot;`args` must be specified&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; nest.is_sequence(args):&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    args = [args]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;# Calculate the total size of arguments on dimension 1.&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  total_arg_size = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  shapes = [a.get_shape() &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; args]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; shape &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; shapes:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; shape.ndims != &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;raise&lt;/span&gt; ValueError(&lt;span class=&quot;string&quot;&gt;&quot;linear is expecting 2D arguments: %s&quot;&lt;/span&gt; % shapes)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; shape[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;].value &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;raise&lt;/span&gt; ValueError(&lt;span class=&quot;string&quot;&gt;&quot;linear expects shape[1] to be provided for shape %s, &quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;                       &lt;span class=&quot;string&quot;&gt;&quot;but saw %s&quot;&lt;/span&gt; % (shape, shape[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;]))&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      total_arg_size += shape[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;].value&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  dtype = [a.dtype &lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; a &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; args][&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;]&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;# Now the computation.&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  scope = vs.get_variable_scope()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;with&lt;/span&gt; vs.variable_scope(scope) &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; outer_scope:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    weights = vs.get_variable(&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        _WEIGHTS_VARIABLE_NAME, [total_arg_size, output_size],&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        dtype=dtype,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        initializer=kernel_initializer)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; len(args) == &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      res = math_ops.matmul(args[&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;], weights)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      res = math_ops.matmul(array_ops.concat(args, &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;), weights)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; bias:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; res&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;with&lt;/span&gt; vs.variable_scope(outer_scope) &lt;span class=&quot;keyword&quot;&gt;as&lt;/span&gt; inner_scope:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      inner_scope.set_partitioner(&lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; bias_initializer &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;        bias_initializer = init_ops.constant_initializer(&lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt;, dtype=dtype)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;      biases = vs.get_variable(&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          _BIAS_VARIABLE_NAME, [output_size],&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          dtype=dtype,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;          initializer=bias_initializer)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; nn_ops.bias_add(res, biases)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;以上是5.16号之前的内容，约等于无。&lt;br&gt;以下是正儿八经的介绍，结合最近实现的流量模型，主要包括&lt;code&gt;BasicRNNCell&lt;/code&gt;, &lt;code&gt;BasicLSTMCell&lt;/code&gt;, &lt;code&gt;MultiRNNCell&lt;/code&gt;, &lt;code&gt;dynamic_rnn&lt;/code&gt;的代码理解，[无比严肃脸]。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Lab" scheme="http://www.codedai.github.io/categories/Lab/"/>
+    
+    
+      <category term="建模" scheme="http://www.codedai.github.io/tags/%E5%BB%BA%E6%A8%A1/"/>
+    
+      <category term="Python" scheme="http://www.codedai.github.io/tags/Python/"/>
+    
+      <category term="TensorFlow" scheme="http://www.codedai.github.io/tags/TensorFlow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>神经网络从入门到放弃 -- 了解TensorFlow框架</title>
+    <link href="http://www.codedai.github.io/2018/05/13/2018-05-15/"/>
+    <id>http://www.codedai.github.io/2018/05/13/2018-05-15/</id>
+    <published>2018-05-14T03:59:00.000Z</published>
+    <updated>2018-05-16T06:22:21.477Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>我需要现在，可你却不回来<br>我需要未来，可你都不敢猜</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="TensorFlow编程堆栈"><a href="#TensorFlow编程堆栈" class="headerlink" title="TensorFlow编程堆栈"></a>TensorFlow编程堆栈</h1><p><img src="http://oavr3g7ux.bkt.clouddn.com/15264029516280.png" alt=""><br>主要是了解<strong>Estimators</strong>和<strong>Datasets</strong></p>
+<h2 id="Estimator"><a href="#Estimator" class="headerlink" title="Estimator"></a>Estimator</h2><p>Estimator是从<code>tf.estimator.Esstimator</code>衍生而来的任何类。<br>要根据预创建的Estimator编写TensorFlow程序，需要执行下面的任务：</p>
+<ul>
+<li>创建一个或者多个输入函数</li>
+<li>定义模型的特征列</li>
+<li>实例化Estimator，指定特征列和各种超参数</li>
+<li>在Estimator对象上调用一个或者多个方法，传递适当的输入函数作为数据的来源。</li>
+</ul>
+<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a>Datasets</h2><p>分两个点来了解<code>tf.data</code> API</p>
+<ul>
+<li>从Numpy数组中读取内存中的数据</li>
+<li>从csv文件中读取行</li>
+</ul>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><p>在最简单的情况下，<code>tf.data.Dataset.from_tensor_slices</code> 函数接受一个数组并返回表示该数组切片的 <code>tf.data.Dataset</code>。例如，一个包含 mnist 训练数据的数组的形状为 (60000, 28, 28)。将该数组传递给 <code>from_tensor_slices</code>，会返回一个包含 60000 个切片的 Dataset 对象，其中每个切片都是一个 28x28 的图像。 </p>
+<p>数据集以透明方式处理字典或元组的任何嵌套组合。确保 <code>features</code> 是标准字典，然后就可以将数组字典转换为字典 Dataset，如下所示：</p>
+<h1 id="程序逻辑"><a href="#程序逻辑" class="headerlink" title="程序逻辑"></a>程序逻辑</h1><ul>
+<li>导入和解析数据集</li>
+<li>创建特征列以描述数据</li>
+<li>选择模型类型</li>
+<li>训练模型</li>
+<li>评估模型的效果</li>
+<li>让经过训练的模型进行预测</li>
+</ul>
+<h2 id="创建输入函数"><a href="#创建输入函数" class="headerlink" title="创建输入函数"></a>创建输入函数</h2><p>输入函数是返回<code>tf.data.Dataset</code>对象的函数，此对象会输出含有下列两个元素的元组：</p>
+<ul>
+<li><code>features</code> Python字典，其中：<ul>
+<li>每个键都是特征的名称</li>
+<li>每个值都是包含此特征所有值的数组</li>
+</ul>
+</li>
+<li><code>label</code> 包含每个样本的标签值的数组</li>
+</ul>
+<h3 id="使用TensorFlow的Dataset-API生成输入函数"><a href="#使用TensorFlow的Dataset-API生成输入函数" class="headerlink" title="使用TensorFlow的Dataset API生成输入函数"></a>使用TensorFlow的Dataset API生成输入函数</h3><p>Dataset API包含下列类<br><img src="http://oavr3g7ux.bkt.clouddn.com/15264140624337.png" alt=""></p>
+<ul>
+<li><code>Dataset</code> - 包含创建和转换数据集的方法的基类。您还可以通过该类从内存中的数据或 Python 生成器初始化数据集。</li>
+<li><code>TextLineDataset</code> - 从文本文件中读取行。</li>
+<li><code>TFRecordDataset</code> - 从 TFRecord 文件中读取记录。</li>
+<li><code>FixedLengthRecordDataset</code> - 从二进制文件中读取具有固定大小的记录。</li>
+<li><code>Iterator</code> - 提供一次访问一个数据集元素的方法。</li>
+</ul>
+<h2 id="选择模型类型"><a href="#选择模型类型" class="headerlink" title="选择模型类型"></a>选择模型类型</h2><p>要指定模型类型，需要实例化一个<strong>Estimator</strong>类，TensorFlow提供了了两类Estimator</p>
+<ul>
+<li>预创建的Estimator</li>
+<li>自定义Estimator</li>
+</ul>
+<h2 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h2><p>实例化<code>tf.Estimator.DNNClassifier</code>会创建一个用于学习的框架。网络已经建成，要想数据流过该模型，需要调用train方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">classifier.train(</div><div class="line">	input_fn = lambda:train_input_fn(train_feature, train_lable, args.batch_size), steps=args.train_steps)</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>steps</code> 参数指示<code>train</code>在完成指定的迭代次数后停止训练。增加steps会延长训练模型的时间，训练模型的时间越长，并不能保证模型就越好。</li>
+<li><code>args.train_steps</code>的默认值是1000，训练步数是一个可以调整的超参数。</li>
+<li><code>input_fn</code>参数会确定提供训练数据的函数。调用<code>train</code>方法表示<code>train_input_fn</code>函数将提供训练数据.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">def train_input_fn(features, labels, batch_size)</div><div class="line">	    &quot;&quot;&quot;An input function for training&quot;&quot;&quot;</div><div class="line">    # Convert the inputs to a Dataset.</div><div class="line">    dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))</div><div class="line"></div><div class="line">    # Shuffle, repeat, and batch the examples.</div><div class="line">    return dataset.shuffle(1000).repeat().batch(batch_size)</div></pre></td></tr></table></figure>
+<ul>
+<li>我们将下列参数传递给<code>train_input_fn</code>：<ul>
+<li>每个键都是特征的名称</li>
+<li>每个值都是包含训练接种每个样本的值得数组</li>
+</ul>
+</li>
+<li><code>train_label</code> 包含训练集中的每个样本的标签值的数组</li>
+<li><code>args.batch_size</code>是一个定义批次大小的整数、</li>
+</ul>
+<p><code>train_input_fn</code>函数依赖于<strong>Dataset API</strong>，用于读取数据并将其转化为<code>train</code>方法所需的格式。以下调用会将输入特征和标签转化为<code>tf.data.Dataset</code>对象，该对象是Dataset API的基类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dataset = tf.data.Dataset.from_tensor_slices((dict(feature), labels))</div></pre></td></tr></table></figure>
+<p><code>tf.dataset</code>类提供很多用于准备训练样本的实用函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dataset = dataset.shuffle(buffer_size=1000)</div><div class="line">                 .repeat(count=None)</div><div class="line">                 .batch(batch_size)</div></pre></td></tr></table></figure>
+<ul>
+<li>要对样本进行随机化处理，可以使用<code>tf.data.Dataset.shuffle</code>。将<code>buffer_size</code>这是样本大于样本数的值来确保数据得到充分的随机化处理。</li>
+<li><code>repeat</code>方法会在结束时重启<code>Dataset</code>。要限制周期数量，就要设置<code>count</code>参数。</li>
+<li><code>train</code> 方法一次处理一批样本。<code>tf.data.Dataset.batch</code> 方法会收集大量样本并将它们堆叠起来以创建批次。这为批次的形状增加了一个维度。新的维度将添加为第一个维度。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(mnist_ds.batch(100))</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;BatchDataset</div><div class="line">  shapes: (?, 28, 28),</div><div class="line">  types: tf.uint8&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>该数据集的批次大小是未知的，因为最后一个批次具有的元素数量会减少.</p>
+</blockquote>
+<ul>
+<li>该程序将默认批次大小设置为 100，意味着 batch 方法将组合多个包含 100 个样本的组。理想的批次大小取决于具体问题。一般来说，较小的批次大小通常会使 train 方法（有时）以牺牲准确率为代价来加快训练模型</li>
+</ul>
+<p>以下return语句会将一批样本传回调用方（train方法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return dataset.make_one_shot_iterator().get_next()</div></pre></td></tr></table></figure>
+<h2 id="评价模型"><a href="#评价模型" class="headerlink" title="评价模型"></a>评价模型</h2><p>为了评估模型的效果，每个Estimator都提供了<code>evaluate</code>方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">classifier.evaluate(</div><div class="line">	input_fn=lambda:eval_input_fn(test_x, test_y, args.batch_size)</div><div class="line">)</div><div class="line"></div><div class="line">print(&apos;\nTest set accuracy: &#123;accuracy:0.3f&#125;\n&apos;.format(**eval_result))</div></pre></td></tr></table></figure>
+<p>调用 <code>classifier.evaluate</code> 与调用 <code>classifier.train</code> 类似。最大的区别在于，<code>classifier.evaluate</code> 必须从<strong>测试集</strong>（而非训练集）中获取样本。换言之，为了公正地评估模型的效果，用于评估模型的样本一定不能与用于训练模型的样本相同。eval_input_fn 函数负责提供来自测试集的一批样本。下面是 eval_input_fn 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">def eval_input_fn(features, labels=None, batch_size=None):</div><div class="line">    &quot;&quot;&quot;An input function for evaluation or prediction&quot;&quot;&quot;</div><div class="line">    if labels is None:</div><div class="line">        # No labels, use only features.</div><div class="line">        inputs = features</div><div class="line">    else:</div><div class="line">        inputs = (features, labels)</div><div class="line"></div><div class="line">    # Convert inputs to a tf.dataset object.</div><div class="line">    dataset = tf.data.Dataset.from_tensor_slices(inputs)</div><div class="line"></div><div class="line">    # Batch the examples</div><div class="line">    assert batch_size is not None, &quot;batch_size must not be None&quot;</div><div class="line">    dataset = dataset.batch(batch_size)</div><div class="line"></div><div class="line">    # Return the read end of the pipeline.</div><div class="line">    return dataset.make_one_shot_iterator().get_next()</div></pre></td></tr></table></figure>
+<p> 当<code>classifier.evaluate</code>调用时，<code>eval_input_fn</code>会执行以下操作：</p>
+<ul>
+<li>将测试集中的特征和标签转换为<code>tf.dataset</code>对象</li>
+<li>穿件一批测试集样本。（无需随机化处理或重复使用测试集样本）</li>
+<li>将该批次的测试机样本返回classifier.evaluate</li>
+</ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="Dataset-读取CSV文件"><a href="#Dataset-读取CSV文件" class="headerlink" title="Dataset 读取CSV文件"></a>Dataset 读取CSV文件</h2><h3 id="构建Dataset"><a href="#构建Dataset" class="headerlink" title="构建Dataset"></a>构建Dataset</h3><p>先构建一个<code>TextLineDataset</code>对象来实现一次读取文件中的一行数据，调用<code>skip</code>方法来跳过文件的第一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ds = tf.data.TextLineDataset(train_path).skip(1)</div></pre></td></tr></table></figure>
+<h3 id="构建csv行解析器"><a href="#构建csv行解析器" class="headerlink" title="构建csv行解析器"></a>构建csv行解析器</h3><p>解析数据集中的每一行，已生成必要的<code>(features, label)</code>对。</p>
+<h4 id="先构建一个函数来解析单行。"><a href="#先构建一个函数来解析单行。" class="headerlink" title="先构建一个函数来解析单行。"></a>先构建一个函数来解析单行。</h4><p>为了生成必要的<code>(features, label)</code>对，必须解析数据集中的每一行。下面的函数会调用<code>tf.decode_csv</code>，以将单行解析为特征和标签两个部分。由于 Estimator 需要将特征表示为字典，因此我们依靠 Python 的内置 dict 和 zip 函数来构建此字典。特征名称是该字典的键。然后，我们调用字典的 pop 方法以从特征字典中移除标签字段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Metadata describing the text columns</span></div><div class="line">COLUMNS = [<span class="string">'SepalLength'</span>, <span class="string">'SepalWidth'</span>,</div><div class="line">           <span class="string">'PetalLength'</span>, <span class="string">'PetalWidth'</span>,</div><div class="line">           <span class="string">'label'</span>]</div><div class="line">FIELD_DEFAULTS = [[<span class="number">0.0</span>], [<span class="number">0.0</span>], [<span class="number">0.0</span>], [<span class="number">0.0</span>], [<span class="number">0</span>]]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">_parse_line</span><span class="params">(line)</span>:</span></div><div class="line">    <span class="comment"># Decode the line into its fields</span></div><div class="line">    fields = tf.decode_csv(line, FIELD_DEFAULTS)</div><div class="line"></div><div class="line">    <span class="comment"># Pack the result into a dictionary</span></div><div class="line">    features = dict(zip(COLUMNS,fields))</div><div class="line"></div><div class="line">    <span class="comment"># Separate the label from the features</span></div><div class="line">    label = features.pop(<span class="string">'label'</span>)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> features, label</div></pre></td></tr></table></figure>
+<h4 id="解析行"><a href="#解析行" class="headerlink" title="解析行"></a>解析行</h4><p>利用<code>map</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">csv_input_fn</span><span class="params">(csv_path, batch_size)</span>:</span></div><div class="line">    <span class="comment"># Create a dataset containing the text lines.</span></div><div class="line">    dataset = tf.data.TextLineDataset(csv_path).skip(<span class="number">1</span>)</div><div class="line"></div><div class="line">    <span class="comment"># Parse each line.</span></div><div class="line">    dataset = dataset.map(_parse_line)</div><div class="line"></div><div class="line">    <span class="comment"># Shuffle, repeat, and batch the examples.</span></div><div class="line">    dataset = dataset.shuffle(<span class="number">1000</span>).repeat().batch(batch_size)</div><div class="line"></div><div class="line">    <span class="comment"># Return the dataset.</span></div><div class="line">    <span class="keyword">return</span> dataset</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.tensorflow.org/get_started/get_started_for_beginners" target="_blank" rel="external">机器学习新手使用入门</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;我需要现在，可你却不回来&lt;br&gt;我需要未来，可你都不敢猜&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Lab" scheme="http://www.codedai.github.io/categories/Lab/"/>
+    
+    
+      <category term="建模" scheme="http://www.codedai.github.io/tags/%E5%BB%BA%E6%A8%A1/"/>
+    
+      <category term="Python" scheme="http://www.codedai.github.io/tags/Python/"/>
+    
+      <category term="TensorFlow" scheme="http://www.codedai.github.io/tags/TensorFlow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>渥太华生存指北</title>
+    <link href="http://www.codedai.github.io/2018/04/15/2018-04-15/"/>
+    <id>http://www.codedai.github.io/2018/04/15/2018-04-15/</id>
+    <published>2018-04-16T03:59:00.000Z</published>
+    <updated>2018-04-15T19:57:26.036Z</updated>
+    
+    <content type="html"><![CDATA[<p>四月能冷成这个样子。</p>
+<p>掌声送给渥太华。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;四月能冷成这个样子。&lt;/p&gt;
+&lt;p&gt;掌声送给渥太华。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+      <category term="Ottawa" scheme="http://www.codedai.github.io/tags/Ottawa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>神经网络从入门到放弃 -- RNN 的 TensorFlow 实现</title>
+    <link href="http://www.codedai.github.io/2018/04/13/2018-04-13/"/>
+    <id>http://www.codedai.github.io/2018/04/13/2018-04-13/</id>
+    <published>2018-04-14T03:59:00.000Z</published>
+    <updated>2018-04-13T19:53:52.928Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是一篇API吹水。<br>尝试理解。</p>
+<p>我说的是我。</p>
+<a id="more"></a>
+<p>前几天看莫烦的RNN实现教程，里面实现RNN的核心代码–</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">lr = <span class="number">0.01</span></div><div class="line">training_iter = <span class="number">100000</span></div><div class="line">batch_size = <span class="number">128</span></div><div class="line">n_inputs = <span class="number">28</span></div><div class="line">n_steps = <span class="number">28</span></div><div class="line">n_hidden_units = <span class="number">128</span></div><div class="line">n_classes = <span class="number">10</span></div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">RNN</span><span class="params">(X, weights, biases)</span>:</span></div><div class="line">    <span class="comment"># 原始的x是三维数据，[batch_size, n_steps, n_inputs]， 为了进行权值偏置计算则需要reshape成二维数组的样子。</span></div><div class="line">    X = tf.reshape(X, [<span class="number">-1</span>, n_inputs])</div><div class="line"></div><div class="line">    X_in = tf.matmul(X, weights[<span class="string">'in'</span>]) + biases[<span class="string">'in'</span>]</div><div class="line">    X_in = tf.reshape(X_in, [<span class="number">-1</span>, n_steps, n_hidden_units])</div><div class="line"></div><div class="line">    lstm_cell = tf.contrib.rnn.BasicLSTMCell(n_hidden_units, forget_bias=<span class="number">1.0</span>, state_is_tuple=<span class="keyword">True</span>)</div><div class="line">    init_state = lstm_cell.zero_state(batch_size, dtype=tf.float32)</div><div class="line"></div><div class="line">    outputs, final_state = tf.nn.dynamic_rnn(lstm_cell, X_in, initial_state=init_state, time_major=<span class="keyword">False</span>)</div><div class="line"></div><div class="line">    results = tf.matmul(final_state[<span class="number">1</span>], weights[<span class="string">'out'</span>]) + biases[<span class="string">'out'</span>]</div><div class="line"></div><div class="line">    <span class="keyword">return</span> results</div></pre></td></tr></table></figure>
+<p>之中比较核心的<code>tf.contrib.rnn.BasicLSTMCell()</code>和<code>tf.nn.dynamic_rnn()</code>在这里把官方文档复制过来。（捂脸）</p>
+<h1 id="tf-contrib-rnn-BasicLSTMCell"><a href="#tf-contrib-rnn-BasicLSTMCell" class="headerlink" title="tf.contrib.rnn.BasicLSTMCell()"></a>tf.contrib.rnn.BasicLSTMCell()</h1><p>BasicLSTMCell的作用是定义RNN中每个cell的结构。</p>
+<blockquote>
+<p>对于LSTM的cell的结构可以参考<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a> 这篇文章</p>
+</blockquote>
+<h2 id="init"><a href="#init" class="headerlink" title="init"></a><strong>init</strong></h2><p>初始化函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">__init__(</div><div class="line">	num_units,</div><div class="line">	forget_bias=1.0,</div><div class="line">	state_is_tuple=True,</div><div class="line">	activation=None,</div><div class="line">	reuse=None,</div><div class="line">	name=None</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>num_units</code> 定义的是cell中单元的个数，也就是隐藏层的规模</li>
+<li><code>forget_bias</code> 定义的是对前一个cell的输出State的记忆程度，等于1就什么都不忘，等于零就全忘。</li>
+</ul>
+<p>forget gate 如下图所示：<br><img src="http://oavr3g7ux.bkt.clouddn.com/15236457324224.jpg" alt=""></p>
+<ul>
+<li><code>state_is_tuple</code> 定义返回的状态是否用元祖表示，官方建议使用True。</li>
+</ul>
+<h2 id="zero-state"><a href="#zero-state" class="headerlink" title=".zero_state()"></a>.zero_state()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zero_state(</div><div class="line">	batch_size,</div><div class="line">	dtype</div><div class="line">)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>batch_size</code> 定义输入样本批次的数目</li>
+<li><code>dtype</code> 数据类型</li>
+</ul>
+<p>返回的是元素全为零的<code>[batch_size, state_size]</code>矩阵</p>
+<h1 id="tf-nn-dynamic-rnn"><a href="#tf-nn-dynamic-rnn" class="headerlink" title="tf.nn.dynamic_rnn()"></a>tf.nn.dynamic_rnn()</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">outputs, state = tf.nn.dynamic_rnn(</div><div class="line">	cell, </div><div class="line">	inputs,</div><div class="line">	sequence_length=<span class="keyword">None</span>,</div><div class="line">	initial_state=<span class="keyword">None</span>,</div><div class="line">	dtype=<span class="keyword">None</span>,</div><div class="line">	parallel_iterations=<span class="keyword">None</span>,</div><div class="line">	swap_memory=<span class="keyword">False</span>,</div><div class="line">	time_major=<span class="keyword">False</span>,</div><div class="line">	scope=<span class="keyword">None</span></div><div class="line">)</div></pre></td></tr></table></figure>
+<p>此函数会通过，inputs中的<code>steps</code>将网络按时间展开</p>
+<h2 id="inputs"><a href="#inputs" class="headerlink" title="inputs"></a>inputs</h2><ul>
+<li><code>cell</code> 就是上面那个类型了 （RNNCell）。</li>
+<li><code>input</code> Tensor类型，<code>time_major = False</code>时，其形状为<code>[batch_size, steps, ...]</code>，<code>time_major = True</code>时，其形状为<code>[steps, batch_size, ...]</code></li>
+<li><code>sequence_length</code> 可选。<code>[batch_size]</code>的int型向量，这个参数用来指定每个example的长度。e.g.:如果你要输入三句话，且三句话的长度分别是5,10,25,那么sequence_length=[5,10,25]</li>
+<li><code>initial_state</code> 可选。<code>Tensor</code>型的<code>[batch_size, cell.state_size]</code>，可以直接输入RNNCell.zero_state().</li>
+</ul>
+<h2 id="outputs"><a href="#outputs" class="headerlink" title="outputs"></a>outputs</h2><p>outputs输出的是最上面一层的输出，states保存的是最后一个时间输出的states</p>
+<ul>
+<li><code>outputs</code> Tensor类型，<code>time_major = False</code>时，其形状为<code>[batch_size, steps, ...]</code>，<code>time_major = True</code>时，其形状为<code>[steps, batch_size, ...]</code></li>
+<li><code>state</code> The final state. If <code>cell.state_size</code>is an int, this will be shaped <code>[batch_size, cell.state_size]</code>. If it is a <code>TensorShape</code>, this will be shaped <code>[batch_size] + cell.state_size</code>. If it is a (possibly nested) tuple of ints or TensorShape, this will be a tuple having the corresponding shapes. If cells are LSTMCells state will be a tuple containing a LSTMStateTuple for each cell.</li>
+</ul>
+<p>以上。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是一篇API吹水。&lt;br&gt;尝试理解。&lt;/p&gt;
+&lt;p&gt;我说的是我。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Lab" scheme="http://www.codedai.github.io/categories/Lab/"/>
+    
+    
+      <category term="建模" scheme="http://www.codedai.github.io/tags/%E5%BB%BA%E6%A8%A1/"/>
+    
+      <category term="Python" scheme="http://www.codedai.github.io/tags/Python/"/>
+    
+      <category term="API" scheme="http://www.codedai.github.io/tags/API/"/>
+    
+      <category term="RNN" scheme="http://www.codedai.github.io/tags/RNN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>说说吧（2）</title>
+    <link href="http://www.codedai.github.io/2018/03/15/2018-03-15/"/>
+    <id>http://www.codedai.github.io/2018/03/15/2018-03-15/</id>
+    <published>2018-03-15T04:59:00.000Z</published>
+    <updated>2018-03-15T05:03:05.933Z</updated>
+    
+    <content type="html"><![CDATA[<p>我也不知道。 对的还是错的。</p>
+<p>还是挺难的，还是挺难得。</p>
+<p>也不知道自己缺啥。</p>
+<p>看淡和忘掉都不是那么容易的事，</p>
+<p>看来。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我也不知道。 对的还是错的。&lt;/p&gt;
+&lt;p&gt;还是挺难的，还是挺难得。&lt;/p&gt;
+&lt;p&gt;也不知道自己缺啥。&lt;/p&gt;
+&lt;p&gt;看淡和忘掉都不是那么容易的事，&lt;/p&gt;
+&lt;p&gt;看来。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>说说吧</title>
+    <link href="http://www.codedai.github.io/2018/03/04/2018-03-04/"/>
+    <id>http://www.codedai.github.io/2018/03/04/2018-03-04/</id>
+    <published>2018-03-04T05:59:00.000Z</published>
+    <updated>2018-03-04T05:35:44.724Z</updated>
+    
+    <content type="html"><![CDATA[<p>二狗子跟我说：</p>
+<p>“<br>说说吧。<br>”</p>
+<p>“<br>说啥。<br>”</p>
+<p>别把自己当成受害者。</p>
+<p>说到底，最靠谱的是自己，最不靠谱的也是自己。</p>
+<p>嗯</p>
+<p>躲起来吧，先。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;二狗子跟我说：&lt;/p&gt;
+&lt;p&gt;“&lt;br&gt;说说吧。&lt;br&gt;”&lt;/p&gt;
+&lt;p&gt;“&lt;br&gt;说啥。&lt;br&gt;”&lt;/p&gt;
+&lt;p&gt;别把自己当成受害者。&lt;/p&gt;
+&lt;p&gt;说到底，最靠谱的是自己，最不靠谱的也是自己。&lt;/p&gt;
+&lt;p&gt;嗯&lt;/p&gt;
+&lt;p&gt;躲起来吧，先。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>新年快乐</title>
+    <link href="http://www.codedai.github.io/2018/02/15/2018-02-15/"/>
+    <id>http://www.codedai.github.io/2018/02/15/2018-02-15/</id>
+    <published>2018-02-15T17:59:00.000Z</published>
+    <updated>2018-02-15T05:48:09.468Z</updated>
+    
+    <content type="html"><![CDATA[<p>被水淹没不知所措。</p>
+<p>新年快乐。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;被水淹没不知所措。&lt;/p&gt;
+&lt;p&gt;新年快乐。&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读论文之时间序列（2）- ARIMA及其扩展</title>
+    <link href="http://www.codedai.github.io/2018/02/14/2018-02-14-1/"/>
+    <id>http://www.codedai.github.io/2018/02/14/2018-02-14-1/</id>
+    <published>2018-02-15T04:59:00.000Z</published>
+    <updated>2018-02-15T05:45:08.312Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>待解决问题：</p>
+<ul>
+<li>[ ] <strong>时间序列 v.s. Deep Learning</strong></li>
+<li>[ ] Kernel function</li>
+<li>[ ] Markov chains/Network</li>
+<li>[ ] Bayesian Network</li>
+<li>[ ] self-orgnizing map(Kohonen map)</li>
+<li>[ ] Gitment</li>
+</ul>
+<hr>
+<p>本文依旧基于《Short-Term Trafﬁc Flow Forecasting: An Experimental Comparison of Time-Series Analysis and Supervised Learning》，Marco Lippi, Matteo Bertini, and Paolo Frasconi。</p>
+<p>论文看的太慢，真是该死。实验室的大神学长也是指出了最近我比较关系的一个问题，就是ARIMA模型真的是有点偏老了，应该好好考虑一下Deep Learning的方法（LSTM &amp; GRU）。</p>
+<p>定个小目标，17号之出三篇笔记</p>
+<ul>
+<li>ARIMA及其扩展（也就是这篇了）</li>
+<li>LSTM，GRU 模型介绍和对比</li>
+<li>ARIMA模型python实现</li>
+</ul>
+<a id="more"></a>
+<p>ARMA和ARIMA是最流行的时间序列分析模型</p>
+<h1 id="ARMA（自回归滑动）模型"><a href="#ARMA（自回归滑动）模型" class="headerlink" title="ARMA（自回归滑动）模型"></a>ARMA（自回归滑动）模型</h1><p><strong>自回归AR(p)模型</strong>：<br>$$X<em>t = c + \sum</em>{i=1}^p\psi<em>iX</em>{t-i} + \varepsilon_t $$<br>描述的是当前值和历史值之间的关系（PACF图）<br><strong>滑动平均MA(q)模型</strong><br>$$X_t = \mu + \varepsilon<em>t +\sum</em>{i=1}^q\theta<em>i \varepsilon</em>{t-i}$$<br><strong>ARMA(p,q)模型</strong><br>$$X_t = c + \varepsilon<em>t + \sum</em>{i=1}^p\psi<em>iX</em>{t-i} +\sum_{j=1}^q\theta<em>j \varepsilon</em>{t-j}$$</p>
+<h2 id="ARMA滞后算子-Lag-operator-表示法"><a href="#ARMA滞后算子-Lag-operator-表示法" class="headerlink" title="ARMA滞后算子(Lag operator)表示法"></a>ARMA滞后算子(Lag operator)表示法</h2><p>用滞后算子(B)表示ARMA模型，$B^iX<em>t = X</em>{t-i}$<br><strong>AR(p)</strong>：<br>$$\varepsilon<em>t = (1 - \sum</em>{i=1}^p\psi_iB^i)X_t = \varphi(B)X<em>t$$<br>其中$\varphi$表示多项式<br>$$\varphi(B) = 1 - \sum</em>{i=1}^p\psi_iB^i$$<br><strong>MA(q)</strong>:<br>$$X<em>t=(1+\sum</em>{i=1}^q\theta_iB^i)\varepsilon_t = \theta(B)\varepsilon<em>t$$<br>其中$\theta$表示多项式<br>$$\theta(B)=1+\sum</em>{i=1}^q\theta<em>iB^i$$<br><strong>ARMA</strong>:<br>$$(1-\sum</em>{i=1}^p\psi_iB^i)X<em>t = (1+\sum</em>{j=1}^q\theta_jB^j)\varepsilon_t$$<br>或者<br>$$\varphi(B)X_t = \theta(B)\varepsilon_t$$</p>
+<p>若$\varphi(B)=1$是，则ARMA退化成MA(q)模型，若$\theta(B)=1$，则ARMA过程退化成AR(p)过程。</p>
+<h1 id="ARIMA模型"><a href="#ARIMA模型" class="headerlink" title="ARIMA模型"></a>ARIMA模型</h1><p>ARIMA(p,d,q)加入差分，平稳时间序列<br>$$\varphi(B)(1-B)^dX_t = \theta(B)\varepsilon_t$$</p>
+<h1 id="SARIMA-Seasonal-ARIMA-模型"><a href="#SARIMA-Seasonal-ARIMA-模型" class="headerlink" title="SARIMA (Seasonal ARIMA)模型"></a>SARIMA (Seasonal ARIMA)模型</h1><p>SARIMA(p,d,q)*(P,D,Q)s模型是在ARIMA模型的基础上加入周期性自回归，周期性移动平均和周期性差分：<br>$$\psi(B)\Phi(B^S)(1-B)^d(1-B^S)^DX_t=\omega(B)\Omega(B^S)\varepsilon_t$$</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;待解决问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[ ] &lt;strong&gt;时间序列 v.s. Deep Learning&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;[ ] Kernel function&lt;/li&gt;
+&lt;li&gt;[ ] Markov chains/Network&lt;/li&gt;
+&lt;li&gt;[ ] Bayesian Network&lt;/li&gt;
+&lt;li&gt;[ ] self-orgnizing map(Kohonen map)&lt;/li&gt;
+&lt;li&gt;[ ] Gitment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;本文依旧基于《Short-Term Trafﬁc Flow Forecasting: An Experimental Comparison of Time-Series Analysis and Supervised Learning》，Marco Lippi, Matteo Bertini, and Paolo Frasconi。&lt;/p&gt;
+&lt;p&gt;论文看的太慢，真是该死。实验室的大神学长也是指出了最近我比较关系的一个问题，就是ARIMA模型真的是有点偏老了，应该好好考虑一下Deep Learning的方法（LSTM &amp;amp; GRU）。&lt;/p&gt;
+&lt;p&gt;定个小目标，17号之出三篇笔记&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ARIMA及其扩展（也就是这篇了）&lt;/li&gt;
+&lt;li&gt;LSTM，GRU 模型介绍和对比&lt;/li&gt;
+&lt;li&gt;ARIMA模型python实现&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="读论文" scheme="http://www.codedai.github.io/categories/%E8%AF%BB%E8%AE%BA%E6%96%87/"/>
+    
+      <category term="Lab" scheme="http://www.codedai.github.io/categories/%E8%AF%BB%E8%AE%BA%E6%96%87/Lab/"/>
+    
+    
+      <category term="ARIMA" scheme="http://www.codedai.github.io/tags/ARIMA/"/>
+    
+      <category term="时间序列" scheme="http://www.codedai.github.io/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    
+      <category term="建模" scheme="http://www.codedai.github.io/tags/%E5%BB%BA%E6%A8%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>情人节</title>
+    <link href="http://www.codedai.github.io/2018/02/14/2018-02-14/"/>
+    <id>http://www.codedai.github.io/2018/02/14/2018-02-14/</id>
+    <published>2018-02-14T22:31:00.000Z</published>
+    <updated>2018-02-14T05:54:48.837Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近跟吃了屁一样难受。</p>
+<p>在实验室也学到了新的东西。</p>
+<p>：）</p>
+<p>显得就是那么的俏皮。</p>
+<p>嘿，喂狗。</p>
+<a id="more"></a>
+<p>鼻窦炎越来越严重，眼眶疼到睡不着觉。</p>
+<p>冬天的温暖白天，和不太冷但是还是冻僵了手指的冬夜。</p>
+<p>这个城市是有很多地方值得去发现，如果非要去发现的话。</p>
+<p>更需要的是发现另一个城市。</p>
+<p>懒惰却安于现状。</p>
+<p>大过年的。</p>
+<p>别这么多负能量。</p>
+<p>另：去你妈的情人节</p>
+<p>：》</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近跟吃了屁一样难受。&lt;/p&gt;
+&lt;p&gt;在实验室也学到了新的东西。&lt;/p&gt;
+&lt;p&gt;：）&lt;/p&gt;
+&lt;p&gt;显得就是那么的俏皮。&lt;/p&gt;
+&lt;p&gt;嘿，喂狗。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Software Engineering (1) -- Requirements Engineering</title>
+    <link href="http://www.codedai.github.io/2018/02/12/2018-02-12/"/>
+    <id>http://www.codedai.github.io/2018/02/12/2018-02-12/</id>
+    <published>2018-02-12T22:31:00.000Z</published>
+    <updated>2018-02-12T23:42:56.533Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p><strong>A requirement is</strong> </p>
+<ul>
+<li>Capturing the purpose of a system</li>
+<li>An expression of the ideas to be embodied in the system or application under development.</li>
+<li>A statement about the proposed system that all stakeholders agree must be made true for the customer’s problem to be adequately solved.</li>
+<li>A statement which translates or expresses a need and its associated constraints and conditions</li>
+</ul>
+<p><strong>Requirement Engineering is</strong>: a <strong>set of activities</strong> concerned with <strong>eliciting analyzing and communicating</strong> the <strong>purpose</strong> of  a system, and the <strong>contexts</strong>(<em>how and where</em>) in which it will be used. Hence, RE acts as the bridge between the <strong>real world needs</strong>(<em>what is really needed</em>) of <strong>stakeholders</strong>, affected by the system-to-be, and the <strong>capabilities and opportunities</strong>(<em>what is possible</em>) afforded by technologies.</p>
+<h1 id="Type-of-Requirements"><a href="#Type-of-Requirements" class="headerlink" title="Type of Requirements"></a>Type of Requirements</h1><blockquote>
+<p>Note: All requirements must be <strong>verifiable</strong> (by some test, inspection, audit, etc.)</p>
+</blockquote>
+<ul>
+<li>A <strong>goal</strong> is an objective or concern that guides the RE process, but not a requirement yet.</li>
+<li>A <strong>functional requirement</strong> is a requirement defining functions of the system under development<ul>
+<li>Inputs</li>
+<li>Outputs</li>
+<li>Store</li>
+<li>Computations</li>
+<li>Timing &amp; synchronization</li>
+</ul>
+</li>
+<li>A <strong>non-functional requirement</strong> is a requirement characterized by a <em>measurable property</em> or <em>quality</em> such as system performance, robustness, usability, maintainability, etc. </li>
+<li>A <strong>user requirement</strong> is a desired goal or function that a user and other stakeholders expect the system to achieve.</li>
+<li><strong>Application domain requirement</strong> or <strong>business reles</strong></li>
+<li><strong>System requirement</strong></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Definition&quot;&gt;&lt;a href=&quot;#Definition&quot; class=&quot;headerlink&quot; title=&quot;Definition&quot;&gt;&lt;/a&gt;Definition&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;A requirement is&lt;/strong&gt; &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="UO" scheme="http://www.codedai.github.io/categories/UO/"/>
+    
+      <category term="Note" scheme="http://www.codedai.github.io/categories/UO/Note/"/>
+    
+    
+      <category term="Software Engineering" scheme="http://www.codedai.github.io/tags/Software-Engineering/"/>
+    
+      <category term="Requirements Engineering" scheme="http://www.codedai.github.io/tags/Requirements-Engineering/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读论文之时间序列（1）-AR&amp;MA</title>
+    <link href="http://www.codedai.github.io/2018/02/04/2018-02-04-1/"/>
+    <id>http://www.codedai.github.io/2018/02/04/2018-02-04-1/</id>
+    <published>2018-02-04T17:59:00.000Z</published>
+    <updated>2018-02-14T16:08:34.908Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>待解决问题：</p>
+<ul>
+<li>[x] markdown v.s. LaTex</li>
+<li>[ ] Kernel function</li>
+<li>[ ] Markov chains/Network</li>
+<li>[ ] Bayesian Network</li>
+<li>[x] 随机过程的平稳性</li>
+<li>[ ] self-orgnizing map(Kohonen map)</li>
+<li>[x] AR 与 MA 之间的关系</li>
+</ul>
+<hr>
+<a id="more"></a>
+<p>本文基于《Short-Term Trafﬁc Flow Forecasting: An Experimental Comparison of Time-Series Analysis and Supervised Learning》，Marco Lippi, Matteo Bertini, and Paolo Frasconi。论文里面对交通流量预测常用的时间序列模型进行了较为详尽的介绍，本文从基本原理出发，尝试理解论文当中介绍的模型。其中掺杂了自己的一些不成熟的理解，如果有不对的地方还希望各位指正。</p>
+<h1 id="Autoregression-amp-Moving-Average-自回归和移动平均模型"><a href="#Autoregression-amp-Moving-Average-自回归和移动平均模型" class="headerlink" title="Autoregression &amp; Moving Average 自回归和移动平均模型"></a>Autoregression &amp; Moving Average 自回归和移动平均模型</h1><p>AR 和 MA 模型是常见的时间序列模型的基本组成元素</p>
+<h2 id="自回归（AR）模型"><a href="#自回归（AR）模型" class="headerlink" title="自回归（AR）模型"></a>自回归（AR）模型</h2><h3 id="为什么叫自回归？"><a href="#为什么叫自回归？" class="headerlink" title="为什么叫自回归？"></a>为什么叫自回归？</h3><p>自回归模型使用<strong>同一变量</strong>之前各个时期的表现和变化趋势（线性回归）来预测该变量现在的表现情况–自身预测自身，所以叫做自回归。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>$$x_t=c+\psi_0+\psi<em>1x</em>{t-1}+…+\psi<em>px</em>{t-p}+a_t$$<br>其中$a_t$为均值是0，方差是$\sigma^2$的白噪声序列（随机误差值）。<br>X的当前值等于前一个或多个落后期值的线性组合。</p>
+<h4 id="论文定义"><a href="#论文定义" class="headerlink" title="论文定义"></a>论文定义</h4><p>论文中给出了自回归模型的其他情况。</p>
+<p>$$x<em>t \sim N(f(x</em>{t-1},…,x_{t-p}),\sigma)$$，其中f作为回归函数，$\sigma$为噪声标准差，即当期值服从关于$f()$和$\sigma$的正态分布，这个和基本定义是相同的（如果白噪声序列服从正态分布）（统计方向对AR更详尽的解释参照<a href="http://blog.csdn.net/matrix_laboratory/article/details/53906791" target="_blank" rel="external">金融时间序列分析：4. AR自回归模型</a>）。但是$f$的可变性，让论文中的AR模型更加多变</p>
+<ol>
+<li>f为线性组合：此时，AR模型和基本模型相同</li>
+<li>f为前馈神经网络：此时$$f(x<em>{t-1},…,x</em>{t-p};\psi,W) = \psi<em>0 + \sum</em>{j=1}^{h}\psi_j\phi<em>j(x</em>{t-1},…,x_{t_p};W)$$，其中$W$为权值矩阵，$\phi$为对落后期值的非线性函数–在我理解就是神经网络中的激活函数。</li>
+<li>f为$Kernel function$ (save for later)</li>
+</ol>
+<h3 id="图像性质"><a href="#图像性质" class="headerlink" title="图像性质"></a>图像性质</h3><p>AR模型对偏自相关函数（PACF）截尾，对自相关函数（ACF）拖尾。– 所谓截尾指的是从某阶开始均为（接近）0的性质，拖尾指的是并不存在某一阶突然跳变到0而是逐渐衰减为0，参照<a href="">补充</a>中的自相关函数和偏相关函数。</p>
+<h2 id="移动平均（MA）模型"><a href="#移动平均（MA）模型" class="headerlink" title="移动平均（MA）模型"></a>移动平均（MA）模型</h2><p>MA用于平滑数据中突然出现的波动，大的平均期数是的平滑的效果更好，但是过大的q会使得数据对波动不敏感。</p>
+<h3 id="为什么叫移动平均"><a href="#为什么叫移动平均" class="headerlink" title="为什么叫移动平均"></a>为什么叫移动平均</h3><p><a href="http://blog.csdn.net/BVL10101111/article/details/53405428" target="_blank" rel="external">移动平均法又称滑动平均法、滑动平均模型法（Moving average，MA）</a>最后简单移动平均的例子也算是解释了个什么是<strong>移动</strong>，什么是<strong>平均</strong>。</p>
+<h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>历史白噪声的线性组合。<br>Capture the dependence relations between the random variable to be predicted and the unobserved noise process.<br>Rather than use past values of the forecast variable in a regression, a moving average model uses past forecast errors in a regression-like model.<br>$$y_t = c+e_t + \theta<em>1e</em>{t-1}+\theta<em>2e</em>{t-2}+…+\theta<em>qe</em>{t-q}$$</p>
+<h3 id="MA-与-AR-之间的联系"><a href="#MA-与-AR-之间的联系" class="headerlink" title="MA 与 AR 之间的联系"></a>MA 与 AR 之间的联系</h3><p>（这个地方其实一直都不是很清楚）<br>以AR(1)模型为例：<br>$$yt = \phi<em>1y</em>{t-1}+e_t \\ =\phi_1(\phi<em>1y</em>{t-2} +e_{t-1}) \\ = \phi<em>1^2y</em>{t-2}+\phi<em>1e</em>{t-1} + e_t \\ = \phi<em>1^3y</em>{t-3}+\phi<em>1^2e</em>{t-2}+\phi<em>1e</em>{t-1} + e_t \\ …$$<br>推下去就会得到$$y_t = e_t + \phi<em>1e</em>{t-1}+ \phi<em>1^2e</em>{t-2}+ \phi<em>1^3e</em>{t-3} + …$$<br>即一个$MA(\infty)$，在实际应用中可以用低阶的AR模型来替代高阶的MA模型，反之，当某些条件（可转化条件）具备时，一个有限阶移动平均过程也可以转化为某个无限阶自回归过程。（<del>这个反之亦然的推导是什么</del>）。</p>
+<h3 id="图像性质-1"><a href="#图像性质-1" class="headerlink" title="图像性质"></a>图像性质</h3><p>MA模型对偏自相关函数（PACF）拖尾，对自相关函数(ACF)截尾。在金融模型中，MA常用来刻画冲击效应，例如预期之外的事件。</p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="白噪声："><a href="#白噪声：" class="headerlink" title="白噪声："></a>白噪声：</h2><p>白噪声是由一组0均值，不变方差，相互独立的元素构成，当然可以对该元素的分布进行假设（如高斯分布）。白噪声如同他的名字听起来一样是杂乱无章的，各元素之间没有任何联系。由白噪声组成的序列是随机游走，随机游走序列的自相关特点是其自相关函数几乎为1并且衰减很慢，这种特征我们称为长记忆性。</p>
+<h2 id="平稳性："><a href="#平稳性：" class="headerlink" title="平稳性："></a>平稳性：</h2><p>时间序列的平稳性分为强平稳性和弱平稳性。<strong>平稳性的实质是对时间平移的不变形做了假设</strong>。</p>
+<ul>
+<li><strong>弱平稳性</strong>的时间序列需要满足两个条件，均值函数是常数函数，且协方差函数仅与时间差相关。</li>
+<li><strong>强平稳性</strong>是事实上的平稳，他要求时间序列的点同分布</li>
+</ul>
+<p>强平稳性要求过高，而弱平稳性则只要求前两阶矩相同，统计意义更强。</p>
+<h3 id="平稳性验证方法："><a href="#平稳性验证方法：" class="headerlink" title="平稳性验证方法："></a>平稳性验证方法：</h3><ul>
+<li>ADF</li>
+<li>KPSS</li>
+</ul>
+<p>若非平稳，则通过差分<strong>去除趋势</strong>，直到通过平稳性检验。</p>
+<h2 id="参数选择"><a href="#参数选择" class="headerlink" title="参数选择"></a>参数选择</h2><h3 id="自相关函数与偏相关系数"><a href="#自相关函数与偏相关系数" class="headerlink" title="自相关函数与偏相关系数:"></a><a href="http://people.duke.edu/~rnau/411arim3.htm#plots" target="_blank" rel="external">自相关函数与偏相关系数</a>:</h3><p>差分之后，时间序列通过平稳性检验，下一步就是确定ARIMA模型中的各个参数。ARMA模型中经常利用自相关系数(函数)和偏自相关系数（函数）（图）来确定AR/MA模型所要选择的阶数。</p>
+<p>时间序列自相关与概率论中的相关定义本质上是一致的，它衡量的是序列自身在不同的时刻随机变量的相关性；偏自相关系数则剔除了两时刻之间其他随机变量的干扰，是更加纯粹的相关。</p>
+<ul>
+<li>自相关函数（autocorrelation function）图表示的是时间序列和它的滞后序列之间的相关性<ul>
+<li>The autocorrelation of Y at lag k is the correlation between Y and Lag(Y, k)</li>
+</ul>
+</li>
+<li>偏自相关函数（partial autocorrelation function）图表示的滞后时间序列和她的滞后序列之间的偏相关性<ul>
+<li>In general, the “partial” correlation between two variables is the amount of correlation between them which is not explained by their <strong>mutual correlations</strong> with a specified set of other variable.<em>For example</em>: if we are regressing a variable Y on other variables X1, X2, and X3, the partial correlation between Y and X3 is the amount of correlation between Y and X3 the is <strong>not explained by their common correlations with X1 and X2</strong>. This partial correlation can be computed as the square root of the reduction in variance that is achieved by adding X3 to the regression of Y on X1 and X2.</li>
+<li>偏自相关系数描述的是 the amount of correlation between a variable an a lag of itself that is <strong>not explained</strong> by correlations at all <strong>lower-order-lags</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>The autocorrelation of a time series Y at lag 1 is the coefficient of correlation between Yt and Yt-1, which is presumably also the correlation between Yt-1 and Yt-2. But if Yt is correlated with Yt-1, and Yt-1 is equally correlated with Yt-2, then we should also expect to find correlation between Yt and Yt-2. In fact, the amount of correlation we should expect at lag 2 is precisely the square of the lag-1 correlation. Thus, the correlation at lag 1 “propagates” to lag 2 and presumably to higher-order lags. The partial autocorrelation at lag 2 is therefore the difference between the actual correlation at lag 2 and the expected correlation due to the propagation of correlation at lag 1.</p>
+<p>The <strong>partial autocorrelations</strong> at all lags can be computed by fitting a succession of autoregressive models with increasing numbers of lags. In particular, the partial autocorrelation at lag k is equal to the estimated <strong>AR(k)</strong> coefficient in an autoregressive model with k terms – i.e., a multiple regression model in which Y is regressed on LAG(Y, 1), LAG(Y, 2), etc., up to LAG(Y, k). Thus, by mere inspection of the PACF you can determine how many AR terms you need to use to explain the autocorrelation pattern in a time series: if the partial autocorrelation is significant at lag k and not significant at any higher order lags – i.e., if the PACF “cuts off” at lag k – then this suggests that you should try fitting an autoregressive model of order k.</p>
+<p>在介绍完这些之后杜克大学的课件之后讲解了AR/MA signatures:</p>
+<ul>
+<li>If the PACF of the differenced series displays a sharp cutoff and/or the lag-1 autocorrelation is positive–i.e., if the series appears slightly “underdifferenced”–then consider adding an <strong>AR</strong> term to the model. The lag at which the PACF cuts off is the indicated number of <strong>AR</strong> terms.</li>
+<li>If the ACF of the differenced series displays a sharp cutoff and/or the lag-1 autocorrelation is negative–i.e., if the series appears slightly “overdifferenced”–then consider adding an MA term to the model. The lag at which the ACF cuts off is the indicated number of MA terms.</li>
+</ul>
+<p>将自相关偏相关系数和模型系数选择结合起来就是对于：</p>
+<ul>
+<li>AR(p)模型，PACF会在lag=p时截尾，也就是PACF图中的值落入宽带区域中（置信区间）（可以认为相关性为0）</li>
+<li>MA(q)模型，ACF会在lag=q时截尾，同理，也就是ACF图中的值落入宽带区域中</li>
+</ul>
+<p><img src="http://oavr3g7ux.bkt.clouddn.com/15183283728198.jpg" alt=""></p>
+<p>观测上图可见，ACF处于稳定下降的趋势，PACF图在p=8时截断落入宽带区域，故可以考虑选择ARMA(8,0)模型。</p>
+<p>下一篇打算看一下各个模型的构建步骤和具体的python实现</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://people.duke.edu/~rnau/411arim3.htm#plots" target="_blank" rel="external">Identifying the numbers of AR or MA terms in an ARIMA model</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/22248464" target="_blank" rel="external">AR, MA以及ARMA模型</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;待解决问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[x] markdown v.s. LaTex&lt;/li&gt;
+&lt;li&gt;[ ] Kernel function&lt;/li&gt;
+&lt;li&gt;[ ] Markov chains/Network&lt;/li&gt;
+&lt;li&gt;[ ] Bayesian Network&lt;/li&gt;
+&lt;li&gt;[x] 随机过程的平稳性&lt;/li&gt;
+&lt;li&gt;[ ] self-orgnizing map(Kohonen map)&lt;/li&gt;
+&lt;li&gt;[x] AR 与 MA 之间的关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+    
+    </summary>
+    
+      <category term="读论文" scheme="http://www.codedai.github.io/categories/%E8%AF%BB%E8%AE%BA%E6%96%87/"/>
+    
+      <category term="Lab" scheme="http://www.codedai.github.io/categories/%E8%AF%BB%E8%AE%BA%E6%96%87/Lab/"/>
+    
+    
+      <category term="ARIMA" scheme="http://www.codedai.github.io/tags/ARIMA/"/>
+    
+      <category term="时间序列" scheme="http://www.codedai.github.io/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+    
+      <category term="建模" scheme="http://www.codedai.github.io/tags/%E5%BB%BA%E6%A8%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Sun Feb 04 2018 00:00:00 GMT-0500 (EST)</title>
+    <link href="http://www.codedai.github.io/2018/02/04/2018-02-04/"/>
+    <id>http://www.codedai.github.io/2018/02/04/2018-02-04/</id>
+    <published>2018-02-04T17:59:00.000Z</published>
+    <updated>2018-02-04T06:44:46.217Z</updated>
+    
+    <content type="html"><![CDATA[<p>第一次在渥太华看到下的这么安静的雪。</p>
+<hr>
+<p>对于拿感情作为精神和生活支柱的二狗子来说，单相思让所有目光可及的事物变得易碎，生活中也是充满了清脆的碎裂声。尽管支柱这种东西其实有很多选择，但是要是执意选择一个头发丝一样的玩意来充当这个角色，那只能是自认倒霉了。二狗子就应该自认倒霉了，但是更加可悲的是，二狗子的优点之一就是从不认命。</p>
+<hr>
+<p>噩梦包裹下的午睡像睡了一晚上一样。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第一次在渥太华看到下的这么安静的雪。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;对于拿感情作为精神和生活支柱的二狗子来说，单相思让所有目光可及的事物变得易碎，生活中也是充满了清脆的碎裂声。尽管支柱这种东西其实有很多选择，但是要是执意选择一个头发丝一样的玩意来充当这个角色，那只能是自认倒霉了。
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fri Feb 02 2018 00:00:00 GMT-0500 (EST)</title>
+    <link href="http://www.codedai.github.io/2018/02/02/2018-02-02/"/>
+    <id>http://www.codedai.github.io/2018/02/02/2018-02-02/</id>
+    <published>2018-02-02T17:59:00.000Z</published>
+    <updated>2018-02-02T06:48:01.938Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个博客离技术博客的距离是尼玛越来越远了。<br><img src="http://oavr3g7ux.bkt.clouddn.com/DSCF5441_bw.jpg" alt="碎了的冰"><br><a id="more"></a></p>
+<p>我也不知道是什么时候出的问题，那些已经陌生了的曾经熟悉的感觉又开始慢慢变得强烈，孤独让人变得敏感和厚脸皮。</p>
+<p>今年的渥太华变得冷暖不定。雪化了遍地都是浑水，然后在某个夜里结冰，然后又开始洋洋洒洒下着让人惊恐的大雪，不知道哪天晚上171楼下的风又会让人感觉可以穿拖鞋下楼了，就这么循环循环。</p>
+<p>生活好像变得好了起来了，虽然离一开始的设想还是差了很远，但是起码是一个开始吧。不敢太乐观，没有太大的期望就不会太大的失望。只求再多付出一些，能收获些小小的东西。</p>
+<p>2018年已经过去了一个月了呢。<br>不知道你是不是已经开始了新的生活了。</p>
+<p>我想用些碎片化的不知所云来映射一些不敢说出来的事情，尽管这个鸟不拉屎的地方没有人来看，但是还是对那些东西感到羞耻。有些小的动作，小的心思，用来填补每天时间的空隙的东西就是那些用来感动自己的事情。每个故事都应该有个主人公，要是没有的话，就不能叫做故事了。</p>
+<p>最近又没有歌听了。无所事事的时候听的歌是最难找的。要和当时的心境相契合这只是第一个要求，跟季节契合，跟时间契合，跟温度契合，跟光线契合，跟味道契合等等，说的玄乎的理由就是想满足自己莫名的虚荣心，但是的确很多歌变得很聒噪，估计是我变得聒噪了。</p>
+<p>我还是觉得我的感觉是对的。<br>但是我想要的其实是一个否定的答案。</p>
+<p>二狗子早上起床，洗漱完毕，吃完早饭，蹬着小自行车去上学。二狗子的同桌叫大萍，二狗子很喜欢跟大萍说话，是因为大萍每次一开口都是淡淡的薄荷牙膏的味道，二狗子就是那个时候开始一天刷两次牙的。大萍在二狗子这个城市住了很久，但是最后还是搬家了。城市虽然不错但是并不是一个可以让人安心呆着的地方，可能大萍老了之后就会喜欢这个城市，也有可能永远不会喜欢这个城市，但是她肯定是会怀念的。二狗子其实也不是很喜欢这个城市，但是他不能离开。大萍离开了之后，二狗子就开始高频率的换同桌，二狗子有的时候挺喜欢换同桌的，很新鲜，但是有的时候二狗子也不喜欢，这是因为他喜欢跟上个人同桌。<br>中午，二狗子回家吃饭。骑车子回家，锁好，查一下邮箱里面有没有来喜欢的杂志，失望的次数总是多的，因为数学周报和英语日报的频率明显比漫画月刊高的多的多。虽然不喜欢但是二狗子还是把报纸拿上去，因为中午饭桌上还是要有些东西看的，第四版上的开心一刻足够撑过吃饭的十五分钟了。二狗子自己也不知道是什么时候开始有睡午觉的习惯了，可能是哪个没睡午觉的下午二狗子在最暴躁的数学老师的课上睡着了，然后二狗子就开始睡午觉了，但是好多次却因为睡午觉，起床晚了，耽误了数学老师的课。<br>下午上课前朋友跟二狗子说从隔壁班来了一个学生，说是特别喜欢咱班主任的管理风格，也喜欢咱们班的班级氛围，申请了好久，终于成功。二狗子没见到这个同学，但是他觉得自己可能不喜欢这个学生，他觉得这个人想的太多，什么风格氛围坚持不懈的太复杂，喜欢不应该是没有理由么，谁会给自己找那么多喜欢的理由，不行就放弃，坚持真的太累了吧。但是二狗子也挺喜欢班主任的，他只是知道自己喜欢班主任，别人硬要问起来为什么喜欢班主任，二狗子也能说个一二三条理由，但是他自己一个人的时候是不想想这些东西的，太累了，明明喜欢或者讨厌一个人是一个很轻松的事情的。<br>其实，二狗子刚来这个学校的时候是有晚自习的，但是后来没有了，说是素质教育。二狗子其实挺喜欢上晚自习的，二狗子喜欢晚上，喜欢有很多人的晚上，一个人的晚上太孤独了，之前的那个班主任老是喜欢喝多了来给大家上晚自习，在教室外面抽烟，在教室里面胡言乱语，和同学谈感情，但是其实同学们都很不喜欢之前那个班主任，二狗子更是不喜欢，因为他打过二狗子，这个理由就简单了但是又让人愤怒，所以二狗子就只是告诉自己不喜欢之前的班主任了。<br>上完晚自习，天上下了大雪很大很大的雪。二狗子妈妈以前跟二狗子说她小时候雪下的特别大，可以没过小腿，二狗子觉得这是个小马过河的故事，就没有跟妈妈多说。但是二狗子妈妈说这次的雪要比她小时候的雪大的多的多，她也没有见过这么大的雪。二狗子妈妈的头发都白了，但是不是因为雪落上去了，是因为二狗子妈妈老了，二狗子觉得可能是妈妈老了记性里面的度量衡也会出现偏差，怎么会比没过小腿的雪还大的雪呢（这时候二狗子就选择相信妈妈的小时候是指妈妈十四五岁的时候了）。<br>回家的路上二狗子没有摔跤，因为刚下了雪的地上其实是不滑的，只要踩上松软的雪就可以了。二狗子喜欢雪保持洁净蓬松的样子，让人很想陷在里面，因为感觉里面应该是温暖的。<br>晚上二狗子要睡觉了，睡觉前他才想起来没有刷牙，大萍走了之后，他老是忘了刷牙，好像大萍走的时候把他一部分的习惯拿走了，好像那些习惯本来就是属于大萍的。二狗子觉得自己那时候应该是喜欢大萍的。其实当年二狗子也觉得自己是喜欢大萍，但是现在二狗子觉得，当时的喜欢不是喜欢，现在才是对当时感情的准确定义，虽然标签都是喜欢，但是喜欢和喜欢又是不一样的，二狗子觉得过了这么多年，都很久没有和大萍联系，对感情的定义是有好处的，少了很多激情下的不理智的因素，做出的判断更加纯粹。二狗子对这个解释很满意，但是他还是宁愿自己是不理智的，或者大萍现在就在身边，这样他就能告诉大萍当时他是喜欢她的。当然，这对大萍并没有什么影响，因为大萍并不喜欢二狗子，二狗子在大萍心里和三猫子，四跳蚤没有多少区别，不然也不可能这么多年都不会来联系二狗子。（其实这些也是二狗子的主观想法–虽然和客观现实一致–但是写成客观的是为了安慰二狗子，让人死心是让人不受煎熬的最好的方法，痛苦是因为充满了希望）<br>有几次二狗子做梦的时候会梦到一个叫芬达的姑娘，不是一看到就会让人联想到黄色的甜到发腻冒着气泡，喝到嘴里却有点辣舌头的那种感觉。芬达是二狗子喜欢的人，就是那种要是能在身边遇到，二狗子就会有勇气跟她说我真的喜欢你的那种人。芬达是个很温柔的人，从长相到性格都是很温柔的人，像春末的风，让人感到温暖的凉风，风的味道是凉爽又温暖的味道，是夏末的圆月的味道。芬达的眼睛里是有宇宙的，因为是梦里，二狗子早就忘了芬达的眼睛的样子，但是既然是二狗子喜欢的样子，那就是宇宙的样子，浩渺空旷却不会让人感到寂寞，宇宙里面每个星球都离得很远，但是每个星球都很热闹。看着眼睛就知道这双眼睛的主人肯定是个会让人看过去第一眼就不由得微笑感到幸福的人。芬达没有出现在二狗子的真实的生活里。其实这句话对芬达很不公平，梦里的世界也是真实世界的一部分，而且有很多时候我们真的是不得已要醒来。有人告诉二狗子说，梦里其实是不能发出声音的，所以，梦都是无声的，所以二狗子就忘记了芬达的声音了，但其实在二狗子的记忆里芬达是有声音的，她跟二狗子说了很多的话，从初次见面到最后一次见面，要是没有说过话，二狗子是怎么知道芬达的名字的呢？她和二狗子谈了很多事情，二狗子觉得自己把所有的事情都跟芬达说了，但是却又觉得有好多的事情想要跟芬达说。<br>二狗子觉得自己欠自己一个喜欢，他应该对芬达说一声喜欢，他在梦里觉得芬达是喜欢自己的，他更是无比确定自己是喜欢芬达的，因为芬达最后一次出现在他梦里的时候，二狗子预感到可能是最后一次跟芬达见面了。二狗子哭的惨，他在梦里觉得第二天早上起来枕头肯定都是湿透了的。芬达很守信用的再也没有出现在二狗子的梦里。二狗子很喜欢那种强烈的感情，在现实中他要努力拒绝那种感觉。他知道这种感觉很容易给别人带来不便，也很容易让自己暴露在不明确的火力之下。其实有的时候自己的出现不给别人带来麻烦就很不错了，能锦上添花只是更好不过。</p>
+<p>月亮升起来又落下去，从圆月到姑娘笑起来的眉毛，从寒冷到炎热再到寒冷。</p>
+<p>后来，二狗子的自行车被偷走了，然后就是新的故事了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这个博客离技术博客的距离是尼玛越来越远了。&lt;br&gt;&lt;img src=&quot;http://oavr3g7ux.bkt.clouddn.com/DSCF5441_bw.jpg&quot; alt=&quot;碎了的冰&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>新年快乐</title>
+    <link href="http://www.codedai.github.io/2018/01/01/happynewyear/"/>
+    <id>http://www.codedai.github.io/2018/01/01/happynewyear/</id>
+    <published>2018-01-01T10:59:00.000Z</published>
+    <updated>2018-01-01T11:00:03.035Z</updated>
+    
+    <content type="html"><![CDATA[<p>新年快乐，<br>这是一篇酒后凌晨记，所以有什么措辞，错别字，逻辑，语法，三观等问题请大家本着看屁的态度一笑而过。</p>
+<a id="more"></a>
+<p>我一方面一直很是嘲笑所谓缘分的说法，感觉是那种缺爱的文艺青年编出来骗自己的说法，一方面又莫名喜欢用所谓的缘分论解释身边的一些事情。但是这应该是我的另一个毛病的并发症——习惯用简单的原因解释生活中的任何问题——所以，“缘分”的出现让很多事情变得好解决了。</p>
+<p>“我喜欢上了一个妹子，追不追得上？” “缘分来了挡也挡不住，不要犹豫，缘分转瞬即逝”<br>“妹子答应我了！” “这就是缘分！”<br>“妹子拒绝我了/离开我了！” “可能是缘分不到吧【哭哭脸】”</p>
+<p> 在我的人生里出现最多的还是，“缘分不到”等诸如此类的说法。我喜欢这个理由，可以让我很坦然的接受我不想接受的结果，因为“缘分是天注定”，老天爷的事情我们凡人有什么能力做出改变呢？要是真的讨论背后的原因，可以大概分为下面两大类吧：</p>
+<ul>
+<li>不想接受付出了努力，但是没有得到和心里相同的结果</li>
+<li>不想付出努力，也不想接受一事无成的结果</li>
+</ul>
+<p>所以说呢？</p>
+<p>有些事情是你最好永远都不要为之做出努力的，这是第二类里面比较扯淡的小情况。很多很多，希望大家不要对号入座，比如说喜欢上一个不该喜欢的人，挽回一个不该挽回的人，帮助一个不该帮助的人，去一个不该去的地方，离开一个不该离开的地方，简化不该简化的代码，把0.7的铅芯塞到0.5的自动铅笔里面等等等等…其实这里说实话该不该的只有真正产生了你不喜欢的结果你猜会再发牢骚，最简单的是分辨该不该喜欢一个人，我想举个例子但是例子的针对性太重，我这就不自寻死路了。这种时候最好的方法就是自我消化和自我排解，喝酒吃肉，充实生活，直到打消自己愚蠢的念头，我知道我20好几的岁数说这个一定是十分好笑了，但是没办法，我一直很是蠢笨，我也希望以后也可以一直蠢笨下去，我觉得被压抑住的情感可能是最最最真挚的热烈的情感，当然只是对我来说。单方面的感情绝对是体验感最差但也是最好的感情结构之一，最差的原因有很多，好的原因是你喜欢的那个人永远都是自己喜欢的样子，也永远不会因为感情的问题伤害到另一个无辜的人，当然这里面掺杂了很多生活失意者的自我欺骗，但是我不能否认。</p>
+<p>我感觉酒精从一开始淹没我脑子的水位逐渐下降，神志清醒并不是很适合继续写下去。</p>
+<p>2018——</p>
+<p>我老是觉得2018早就来了。<br>小时候写日记，在刚过1.1之后还是会写成上个年份，但是最近我老是会把年份写成2018，很是奇怪。2018有很多让人期待的事情么？</p>
+<p>不如你来告诉我？</p>
+<p>有些事情适合留在心底，其导致的结果要跟着自己走向坟墓，或者走向光明。</p>
+<p>多照些照片吧。有些东西需要记录下来，因为可能以后就没有机会了，有些东西也要去探索一下，因为太熟悉的生活方式会产生很多负面的情绪。</p>
+<p>我踏马在提醒你一次，有些话就是烂在你的狗肚子里也千万千万别哔哔哔哔出来，化成春泥更护花，就是这个道理。</p>
+<p>这话对不对的，要你自己做了傻逼事之后才能知道，所以还是祝你好运。</p>
+<p>新年快乐！</p>
+<p>美滋滋！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;新年快乐，&lt;br&gt;这是一篇酒后凌晨记，所以有什么措辞，错别字，逻辑，语法，三观等问题请大家本着看屁的态度一笑而过。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>无病呻吟的洗地文</title>
+    <link href="http://www.codedai.github.io/2017/11/29/color/"/>
+    <id>http://www.codedai.github.io/2017/11/29/color/</id>
+    <published>2017-11-29T08:44:19.000Z</published>
+    <updated>2017-11-29T10:24:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>电脑终于恢复正常的工作状态，虽然还留有一些问题，但是现在这个节骨眼明显不是解决这些问题的时候。</p>
+<p>这个很久不更新的博文也是有点无病呻吟的意味，只是记录一下这阵子乱七八糟的想法，希望有朝一日自己成熟了之后可以再看到这篇文章，然后骂那时候的自己是个傻X。<br><a id="more"></a><br>怎么样去保持自己的理性和独立思考能力？</p>
+<p>最近一堆词扑面而来，虐童，性侵，自由，民主……诸如此类，沸沸扬扬。</p>
+<p>大家都想把自己划到自己所定义的正义的一方里面去，为正义发声，谴责不正义的行为，这一点无可厚非。但是我们定义的正义真的是正义么。</p>
+<p>三原色事件一出，网络到处风起云涌，传播速度飞快，朋友圈到处都是嫉恶如仇，欲先杀之而后快。虐童，性侵，在谁看来都是气的发抖的字眼被抖落在人们面前，其中的军队，上市公司，北京等词更是让人浮想联翩。事件传播发酵，我也为此愤怒。</p>
+<p>“请告诉我们真相！”</p>
+<p>哦，真相就是这样！一天之内各种公众号就披露了真相，孩子身上的针眼，家长群里面的聊天记录，来自家长转述的孩子们的陈述，“迷药”，“光溜溜”…… 那种冲击是真的可以让人哭出来的，那他妈可是个小孩子啊，你们怎么能这么对待一个孩子。</p>
+<p>我们想到了《熔炉》，《素媛》。<br>但是我不知道有多少人也能想起还有一个电影叫《狩猎》。</p>
+<p>和让人愤怒，戳痛人心的朋友圈文字相比，我们更需要的是等待，等待最后的真相搬上台面。</p>
+<p>然而调查部门的取证速度明显慢过了民意法庭的审判速度，甚至在大众将”违法者“已经千刀万剐之后调查结果还没有出来。</p>
+<p>太慢了。</p>
+<p>结果出来了，一张蓝纸，专业，简洁，同时也冰冷，也好像有点违背民意。</p>
+<p>真是骗鬼呢！我一个非专业人员都知道这个报告是假的，我可以闻出阴谋的味道！</p>
+<p>不可否认，政府的公信力缺失让人无比心寒。大家宁愿相信在风中飘着的声音，也不想相信公安机关在实地调查取证之后给出的报告。</p>
+<p>我想说的是在双方都没有公开出令人信服的证据之前——家长的证据其实也是家长群里的聊天记录和家长向别人描述的和网友发酵出来的，调查部门也没有恢复关键的视频记录——非要让我选择相信一方，我选择相信那张蓝纸。</p>
+<p>如果我的孩子被性侵了，除非把我杀死，我也不会说我在造谣污蔑政府。那可是我的孩子，你拿什么来换我让我在承认造谣的笔录上签下字，那些”谣言“后面是我的骨肉啊。幼儿园的孩子父母算起来也是80后甚至90后了，也是网络的主力军的一员，血气方刚也像你我一样，怎么能忍心自己的孩子和自己受这样的侮辱。</p>
+<p>如果国家真的用了手段让人这样认罪，这个国家已经灭亡了。</p>
+<p>医院的检测报告可以作假，认罪笔录可以作假，调查报告可以作假，只有人民群众的舆论不会有假。原来那些”不惮以最坏的恶意揣测中国人“的人，也不是揣测的所有中国人。</p>
+<p>有人拿携程和三原色做对比，前者大v发声，后者则是公众号传播，前者搜索量数倍后者。个人愚见，前者问题很明确，虐童，视频证据确凿；后者除了一开始针眼图证据直指虐童之外，性侵，军团都没有确凿证据，况且，军队，这个词不是可以随便拿出来就能上色的。</p>
+<p>现在想想，我们在事件发生时的态度是督促尽快调查给出真相么？好像不是，我们在看到报道的时候就开始恶心这群上市公司剥削者的丑陋嘴脸，恶心军队的无法无天，恶心政府对揭露真相言论的封锁。事件还没有到第二天，大家都成了比福尔摩斯还要厉害的人，瞬间看破真相，为事件敲了锤。我们一开始是质疑的态度么？还是说我们早就有了答案。</p>
+<p>有的时候，我们太着急，急于知道真相，急于满足自己的好奇心。有的时候我们也太健忘，”虐童“，这个被政府和舆论都确认的东西在得到双方证明之后就被忘记了，大家的注意力就从上面转移出来到了”到底有没有性侵“这件事上。</p>
+<p>我们真的正义么？就算在我们自己划定的区域里，我们真的正义么？</p>
+<p>我希望那张蓝纸是真的，起码那些孩子受到的伤害少了很多。</p>
+<p>假如视频可以恢复，我们就可以买单么？</p>
+<p>除了虐童，还有信任。</p>
+<p>其实我们期待的是政府和人民真刀真枪的几个来回，我们问什么政府答什么。</p>
+<hr>
+<p>真是被自己笑惨了。</p>
+<p>我就只是个被成功洗脑的小粉红吧。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;电脑终于恢复正常的工作状态，虽然还留有一些问题，但是现在这个节骨眼明显不是解决这些问题的时候。&lt;/p&gt;
+&lt;p&gt;这个很久不更新的博文也是有点无病呻吟的意味，只是记录一下这阵子乱七八糟的想法，希望有朝一日自己成熟了之后可以再看到这篇文章，然后骂那时候的自己是个傻X。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="日记" scheme="http://www.codedai.github.io/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>五六月以及毕业快乐</title>
+    <link href="http://www.codedai.github.io/2017/05/27/scu_finally/"/>
+    <id>http://www.codedai.github.io/2017/05/27/scu_finally/</id>
+    <published>2017-05-27T15:12:19.000Z</published>
+    <updated>2017-06-27T16:47:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://oavr3g7ux.bkt.clouddn.com/14985818848054.jpg" alt=""></p>
+<a id="more"></a>
+<p>下了飞机的那一刻，我就知道这个暑假必定要以刺激的开场迎接我。<br>刚换好手机卡就收到指导老师的微信消息——“记得5.1号交初稿。”我看了一眼手机，是5.1号，没有问题。<br>恩，岁月静好。<br>敌军围困万千重，我自岿然不动。<br>人有多大胆，地有多大产。<br>我没有丝毫的慌乱，因为我还没有移动出祖国的心脏。我淡定的在免税店逛了一圈，空手出来，等了半个小时的行李，和老张老王见面，北京的太阳很毒，照的我睁不开眼，但是我其实在机场里，并没有阳光。<br>公共汽车，公共高铁，私家小车，夜里我到了想念了一年的家里。躺到熟悉的床上，我，感慨万千，然后睡着了。<br>醒来，阳光刚刚露头的意思，时间是五点，仿佛高中的时光又回到身边，我穿好衣服，出了门，去了高中。学校里一堆小娃娃投来异样的目光，好像在思考“这样的一个人，为什么会出现我们中间，是我们中间出了叛徒，还是说，敌人的中间出现了叛徒。”或者是我对现在单纯高中生的内心过度解读，他们可能想的只是今天早上起得比昨天早啊。<br>此时，我的论文字数依旧稳定在0字左右。但是我的心已经不像之前一样，波澜不惊中也透漏着暴风雨来临前的蠢蠢欲动。<br>老师的消息在中午如期而至，“论文写得怎么样了？”。我选择不回复，其主要原因是因为逃避虽然可耻但是有用，我没看过这个电视剧，但是被b站的弹幕普及了多次，也就记住了。<br>大海不可能永远平静。<br>如果我能像大海一样庞大，能不能感受到月亮吸引着我的皮肤，像是有人给你挠痒痒，还是像老妈揪你皮还非要说是按摩的手法。<br>“没交初稿的是不是都不想毕业了？”<br>这句话不像月亮的引力，到是有点像莫名而起的风暴。生活的节奏突然加快，BGM也变得激昂慷慨。<br>在微信上，我用一种近乎下跪的语气和老师做出承诺，好在没有当面谈，不然我怕真的一咕咚就给老师跪了，抱着大腿哭。最后的期限是当天天下午8点之前。感谢老师在我出了一身又一身的冷汗之后，在我哭出来之前，将期限延至第二天中午12点。<br>除了感谢老师，还感谢一天有24小时。<br>凉了的茶加上热水的味道有点奇怪，但是还是一杯一杯的喝。30个小时之后，我的手已经握不住铅笔。<br>好在，写完了。<br>睡了。</p>
+<p>醒过来的时候，好像是到了成都了吧，答辩也结束了吧。</p>
+<p>到了成都那天，第一次去了川西坝子，也是第一次那么全的人一起吃饭。开了一瓶红酒之后，酒量见长的缘故吧，又开了两瓶歪嘴，火锅没吃多少，酒到是吃了个够，十多个人，调侃着，吹着牛逼，有的渐渐上了头，阳哥和坤哥一根又一根的抽着烟，四年之后终于看透了轩哥酒量也是了了，王大可也是舔了几口就基本不做挣扎了，火锅咕嘟咕嘟的冒着热气，菜下的越来越慢，声音也越来越嘈杂，谁也没说以后的事情，也没谈到毕业的事情，当时的我也把这茬给忘了，或者是都忘了吧。从西边的刺眼到华灯初上，饭局也慢慢接近尾声，奇怪的是没有了之前一起吃饭的走心阶段。对于我，我有点怕走心了控制不住，再说离最后的分开还有好久呢。<br>吃完饭，一群人在破败之后的商业街找了家学生创业的小店开了狼人杀。一年的留学提升最高的还是自己的狼人杀水平。不知道杀了几局，酒劲也慢慢退下去，不知道喝多了还是说太多话，嘴干的要紧。店里的女店长贴心的一人送来了一杯加了葡萄糖的水，估计是看我们喝的太多，怕我们酒后闹事。看在女店长的善心上，我们也很贴心的玩到将近凌晨四点。<br>睡了，睡了，太累了。</p>
+<p>日常上了床还是要拖着坤哥用不稳定的4G流量开一局王者荣耀。<br>是输是赢，都要睡了。</p>
+<p>再醒了就是从泰国回来吧，泰国的事情以后再说吧，好像不是一条世界线的事情。<br>从泰国回来之后，猴子和大可就溜了，前者本着百善孝为先的中华传统美德，回家陪爸妈；后者则是本着媳妇最大的现实考量飞去了东北。都挺好的，在我不在的时候偷偷逃跑，可能怕我再跑到他们寝室里面瞎扯扯到一两点，影响鱼松和大明的休息。</p>
+<p>写到这里开始抒情的话我觉的有点为时太早，因为毕竟后面还有很多要写。</p>
+<p>然后就是毕业证书，学位证书发放那天，突然感觉自己就被刺痛了，那个叫毕业的东西突然就来到了面前。二基楼五楼的走廊里站满了等着拿毕业证的同学，大家也都相互说着，“这次川大是真的不要我了”，这类的话，当然对于那些留本校读研读博的家伙们这些话是不能让导师听到的。川大图书馆刷卡进不去的时候我都只是觉得自己是个比你们这些刷卡进的小家伙们都有资历的老家伙，围合阿姨来收寝室钥匙的时候也只是为自己把钥匙搞丢和少了五块钱买水喝感到小心疼。毕业证拿到手的那一刻，才确实的觉得这个学校一脚把自己踢了出去。<br>我其实真的挺失落的，好像分别真的要来了一样，其实分别早就开始了不是么。</p>
+<p>轩哥突然确定了回家的日子，领毕业证的第二天，机票都订好了，肉乎着过了四年的轩哥突然变得麻利了很多，通宵了一晚上早上六点开始收拾东西滚蛋，早上八点左右在遗漏了无数东西之后，坐上了去机场的Uber，临走还不忘坑学霸一趟车钱。<br>于是轩哥也走了。</p>
+<p>然后夏琳也溜了，朋友圈发了和小寝其他3人的合照，也就不见了人影。</p>
+<p>然后是大神，飞机延误了一晚上半夜还在给双流机场打电话，问问是不是航班取消，还是说只是航班延误到了第二天早上五点。最后双流机场也没有把大神留下，说是仪式性的，我觉得还是装逼的偷了一根烟抽了，说是最后一根烟了，提着吉他，有种三流歌手要去西藏或者丽江或者什么青春励志鸡汤文里面称为远方的地方去了，其实只是很low的去北京看媳妇和挣钱，很没有追求的生活。嗯，于是大神也溜了。</p>
+<p>我其实应该睡觉了，和坤哥开黑的日常过后，我跟坤哥说早上闹钟要是5：30响的你TM就别叫我，要是5：40响的就叫我起床。因为坤哥也要溜了。<br>睡了。</p>
+<p>其实那天晚上睡得不是很舒服，我睡觉前冥冥之中感觉不用坤哥叫我我也能醒。我一直都对自己的睡眠质量比较有把握，除了大一上学期回家的时候睡过了差点误了飞机之外，都没出过什么岔子。这次是第二次岔子。<br>早上的阳光把我叫醒的时候，我没有习惯性的按亮手机看看是几点了，因为我觉得阳光耀眼的时候就不是早上六点的问题了。我也没有很快的坐起来，因为早上刚醒太快坐起来头会疼，我起来，意料之中的，斜对面床上的那个每天晚上跟我开黑的两个月换一次女朋友，有了女票就不好好跟我聊天的撒币溜走了。没来的及送他。<br>寝室里面特别安静，因为阳光是没有声音的，空调的声音这几年过来也渐渐适应了。我爬下床，坤哥的桌子里面还是留了一堆乱七八糟的东西，床上也铺着垫子，放着枕头和被褥，要不是知道他早就把要的东西寄回家，还真的会以为他只是出门去小吃城吃东西去了。<br>坤哥在我睡着的时候溜了。</p>
+<p>然后就是我了。</p>
+<p>之后的次序我就不是很清楚了，洋哥说是陪媳妇陪到7月，学校寝室就能住到27号，你咋陪到七月。大明在成都找了房子，小涛也不知道什么时候跑掉了。</p>
+<p><img src="http://oavr3g7ux.bkt.clouddn.com/14985819383098.jpg" alt=""></p>
+<p>然后27号早上李狗蛋同学在群里说，”寝室最后一人就要走了“。寝室里面还是乱成一团，阿姨见了估计会骂。大一时候贴的照片过了四年垮掉了一个角，最终也是没有粘好，三个小寝门上的三位领导人的照片到是很稳。</p>
+<p>留了撸哥一个人在川大继续奋斗，希望谢博士能帮撸哥一把。</p>
+<p>到此，202，四年的生活，最后的几天，就结束了。</p>
+<p>大家再见，希望以后能再一起这样住。</p>
+<p>睡了。</p>
+<p><img src="http://oavr3g7ux.bkt.clouddn.com/14985819564791.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://oavr3g7ux.bkt.clouddn.com/14985818848054.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="毕业" scheme="http://www.codedai.github.io/categories/%E6%AF%95%E4%B8%9A/"/>
+    
+    
+      <category term="sketch" scheme="http://www.codedai.github.io/tags/sketch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>干票大的 I</title>
+    <link href="http://www.codedai.github.io/2017/01/10/IELTSWriteI/"/>
+    <id>http://www.codedai.github.io/2017/01/10/IELTSWriteI/</id>
+    <published>2017-01-10T17:43:00.000Z</published>
+    <updated>2017-01-11T05:49:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>让我们开始吧</p>
+<a id="more"></a>
+<p><strong>Some people think that politicians have the greatest influence on the world. Other people, however, believe that scientists have the greatest influence. Discuss both of views and give you opinion</strong></p>
+<ol>
+<li>政治家–操作邪恶和美好影响世界<ol>
+<li>邪恶：冲突和战争很多源于政治，带来的痛苦还是结束残暴？举例：二战，民族英雄</li>
+<li>美好：多边会议改善人民生活。举例：WTO，联合国</li>
+</ol>
+</li>
+<li>科学家–技术突破有建设，有破坏<ol>
+<li>三次工业革命，全新世界</li>
+<li>无奇制作制造战争，举例：美国在伊拉克导弹导致畸形儿</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>There are an increasing number of people who do not know their neighbors, what causes this situation? How to solve?</strong></p>
+<ol>
+<li>原因：<ol>
+<li>城市化：<ol>
+<li>过去–农村，隔得近，互动多，底楼和庭院</li>
+<li>现在–套房，垂直方向，没交流</li>
+</ol>
+</li>
+<li>工作和生活方式的改变<ol>
+<li>农村–露天干活，闲聊走动</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>解决–工作重心转移，主动拜访搞活动，校区管理方参与带头</li>
+</ol>
+<hr>
+<p><strong>In some countries, young people are not only richer, but also safer and healthier than ever more. However, they are less happy. What might be the main reasons of this?What can be done for this?</strong> </p>
+<ol>
+<li>不快乐的原因<ol>
+<li>教育，前程，成绩和名校–考高</li>
+<li>自我迷失，心理不成熟</li>
+</ol>
+</li>
+<li>怎么办<ol>
+<li>政府干预：新政策改革考核标准，人性化</li>
+<li>父母指导，给建议</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Society is based on rules and laws. It could not function if individuals were free to do whatever they want. To what extent do you agree or disagree?</strong></p>
+<ol>
+<li>有法律法规的好处<ol>
+<li>能让社会正常运转，举例：交通规则</li>
+<li>能维护社会稳定，震慑犯人。</li>
+<li>能保护人们的合法权益</li>
+</ol>
+</li>
+<li>但要适度不能太过：不能任何事情都限制，一定范围内要言论自由</li>
+</ol>
+<hr>
+<p><strong>Children who are brought up in families which do not have a great amount of money are better prepared to deal with the problems of adult life than children who are brought up by wealthy parents. Do you agree or disagree?</strong></p>
+<ol>
+<li>穷人孩子早当家的原因：<ol>
+<li>穷孩子：艰难困苦，独立，适应性强</li>
+<li>富孩子：缺乏经验</li>
+</ol>
+</li>
+<li>个性区别（赞穷孩子）：<ol>
+<li>面对工作：咬牙坚持 v.s. 抱怨放弃</li>
+<li>人际交往：谦恭受欢迎 v.s. 自我中心</li>
+</ol>
+</li>
+<li>个性区别（赞富孩子）：<ol>
+<li>人脉：朋友多 v.s. 没人脉</li>
+<li>处理压力：倾诉释放压力 v.s. 自我消化</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>The gap between the rich and poor is becoming more wider, the rich more richer, the poor even more poorer. What problems can the situation cause and give the solutions?</strong></p>
+<ol>
+<li>导致的后果<ol>
+<li>阻碍经济发展：购买力减弱，企业倒闭，失业</li>
+<li>政府税收减少，扶持穷人少，恶性循环</li>
+<li>破坏和谐社会，社会不稳定</li>
+</ol>
+</li>
+<li>怎么解决<ol>
+<li>增加穷人收入，协调城乡发展，工商业迁入</li>
+<li>限制国企高管薪水</li>
+</ol>
+</li>
+</ol>
+<p><strong>In some countries around the world, men and women are having children later in life. What do you think cause the situation? What are the effects on society and family life?</strong></p>
+<ol>
+<li>原因：<ol>
+<li>教育状况改善，二十岁还在上学</li>
+<li>成本高（结婚基本条件：房，车，工作；婚后育儿费和教育费）</li>
+<li>文化改变，家庭核心，孩子主导&amp;丁克</li>
+</ol>
+</li>
+<li>影响<ol>
+<li>对社会，人口结构（出生率低，劳动力短缺，老龄人口上升）</li>
+<li>对家庭，不欢乐，不完整</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Scientists say that junk food is harmful to people’s health. Some say that the way to ask people to eat less fast food is to educate them, while others say education does not work. Discuss both sides and give your own opinion</strong></p>
+<ol>
+<li>教育有助于翻遍饮食习惯<ol>
+<li>行为基于思想，根除以来</li>
+<li>了解快餐的弊端，肥胖症和其他疾病，心理冲击，转变生活方式</li>
+</ol>
+</li>
+<li>没用，人们会充耳不闻<ol>
+<li>重复信息的免疫，举例：吸烟有害健康</li>
+<li>快餐带来的便利和快乐，讲究效率</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>The unlimited use of cars may cause many problems. What are those problems? Some people think the only way to reduce those problems is to have stricter punishment for driving offenders.<br>What’s your opinion?</strong></p>
+<ol>
+<li>导致问题<ol>
+<li>交通堵塞。举例：世界各地大城市，超出承载能力，几个钟头，十几公里长龙；</li>
+<li>加快石油消耗，供不应求，威胁可持续发展</li>
+<li>尾气，全球变暖和空气污染</li>
+</ol>
+</li>
+<li>同意，要严惩。违章司机是交通事故主因，超速醉驾闯红灯导致悲剧，震慑作用，罚款坐牢。</li>
+<li>不同意，一个巴掌拍不响，杏仁乱穿马路，也要严惩；某些路段设计和施工缺陷，要纠正</li>
+<li>还可以这么做：鼓励少用私家车，步行或者公交；举例，单双号限行</li>
+</ol>
+<hr>
+<p><strong>Memorization of information by frequent repetition(rote learning) plays a role in most education systems. Dose the usefulness of this method of learning outweigh its limitations</strong></p>
+<ol>
+<li>重复记忆对文科重要<ol>
+<li>背历史</li>
+<li>背单词</li>
+<li>人文学科里的很多概念</li>
+</ol>
+</li>
+<li>对理科不管用，学好数理化，公式靠推理</li>
+<li>机械记忆弊端<ol>
+<li>时间多，效率低</li>
+<li>不能举一反三</li>
+<li>不能运用于实践</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Some people think the increasing business and cultural contact between countries brings many positive effects. Others say it causes the loss of national identities. Discuss on both sides and give your opinion.</strong></p>
+<ol>
+<li>能带来好处<ol>
+<li>更多商品和服务：电视，电话</li>
+<li>各国经济合作和发展：改革开放</li>
+<li>了解外面世界，文化多元：交换生，交流活动</li>
+</ol>
+</li>
+<li>民族特性受到威胁<ol>
+<li>本土节日不过了</li>
+<li>互联网文化，生活思维西化</li>
+</ol>
+</li>
+<li>我认为，不可避免。既不要太多限制，也要干预</li>
+</ol>
+<hr>
+<p><strong>Some people think that students with different abilities should be taught together, while others believe students of different abilities should be taught separately. Discuss both views and give your own opinion.</strong></p>
+<ol>
+<li>分开教学好<ol>
+<li>对于身心有缺陷的孩子，保护自尊心，自信心。</li>
+<li>对于天才，不扼杀天分，不会沦为庸才</li>
+<li>对于不同水平的孩子提高效率</li>
+</ol>
+</li>
+<li>不要分开教学<ol>
+<li>按IQ或者成绩分不科学</li>
+<li>产生优越感或者自卑感</li>
+<li>一样的人在一起很难提升</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Many people believe that countries should produce food for all population and imported food as little as possible, To what extent     do you agree or disagree?</strong></p>
+<ol>
+<li>进口食物有必要，<ol>
+<li>前提是养得活自己<ol>
+<li>战争–叙利亚，伊拉克，阿富汗</li>
+<li>饥饿疾病–非洲</li>
+</ol>
+</li>
+<li>国际贸易很平常：阿根廷牛肉，美国大豆，新西兰乳制品</li>
+<li>国内食品不安全，进口食品替代</li>
+</ol>
+</li>
+<li>还是要努力自给自足<ol>
+<li>吃人嘴短，受制于人</li>
+<li>免受污染，猪流感</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Some people prefer to live in big cities. Others believe small cities and towns are better choices. Discuss both views and give your own opinion</strong></p>
+<ol>
+<li>大城市好<ol>
+<li>基础设施完善：交通，网络</li>
+<li>无限的工作机会：更高薪、吸引农民工</li>
+<li>提升自我能力：竞争激烈</li>
+</ol>
+</li>
+<li>小城镇好<ol>
+<li>上下班没那么挤</li>
+<li>排队不用等那么久</li>
+<li>环境好</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Some people think economic development causes poverty, while others believe economic development is the best solution to poverty. Discuss both views and give your own opinion.</strong></p>
+<ol>
+<li>经济发展好<ol>
+<li>改革开放，吃饱穿暖</li>
+<li>高薪职位多</li>
+<li>国家富裕，投资贫困地区或者需要帮助的人–西部大开发，重庆市投资微型企业</li>
+</ol>
+</li>
+<li>经济发展不好<ol>
+<li>贫富差距变大</li>
+<li>出口自然资源，用完就悲剧了</li>
+<li>跨国公司倒闭影响较大</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>The gap between urban areas and rural areas is wider than before. Discuss the reason.</strong></p>
+<ol>
+<li>城市方面原因<ol>
+<li>公司工厂多，工作机会多，农民工进城</li>
+<li>大学多，精英定居</li>
+</ol>
+</li>
+<li>农村方面原因<ol>
+<li>基础设施差，地形不好，历史原因</li>
+<li>马太效应</li>
+<li>政府鼓励，实现共同富裕</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><strong>Some people think that some urgent problems in modern society can only be solved at international level. To what extent do you agree or disagree?</strong></p>
+<ol>
+<li>战争：世界大战，区域战争不断，联合国谈判，维护世界和平</li>
+<li>自然灾害：2011大海啸，互相帮助</li>
+<li>疾病：SARS，猪流感，分享信息资源</li>
+<li>恐怖活动：共同应对</li>
+</ol>
+<hr>
+<p><strong>It has been suggested that everyone in the world want to own a car, a TV and a fridge. Do you think disadvantage of such a development outweigh advantages?</strong></p>
+<ol>
+<li>每个人都要有<ol>
+<li>经济发展，相关产业需求，就业率</li>
+<li>生活水平，不用等车，抢遥控器，吃馊食</li>
+</ol>
+</li>
+<li>会带来问题<ol>
+<li>交通拥堵</li>
+<li>环境污染，尾气，电力消耗，臭氧层</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p><del>祝我生日快乐</del></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;让我们开始吧&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Ottawa" scheme="http://www.codedai.github.io/categories/Ottawa/"/>
+    
+      <category term="Study" scheme="http://www.codedai.github.io/categories/Ottawa/Study/"/>
+    
+    
+      <category term="running_away" scheme="http://www.codedai.github.io/tags/running-away/"/>
+    
+  </entry>
+  
+</feed>
